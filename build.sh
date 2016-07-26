@@ -1,8 +1,15 @@
 #!/bin/bash
 
-########################
-# Harfix3 build script #
-########################
+################################
+################################
+##### Harfix3 build script #####
+################################
+################################
+
+
+##################
+# Normal version #
+##################
 
 # Prepering
 export ARCH=arm
@@ -21,7 +28,9 @@ make -j4
 find -name '*.ko' -exec cp -av {} /home/gemi/git/Harfix3/harfix3/normal/ \;
 cp /home/gemi/git/Harfix3/arch/arm/boot/zImage /home/gemi/git/Harfix3/harfix3/normal/
 
-
+####################
+# MALI fix version #
+####################
 
 # Load config for second compile (MALI fix)
 make custom_mali_fix_i9300_defconfig
