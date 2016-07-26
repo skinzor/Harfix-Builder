@@ -1,0 +1,7 @@
+### sysinitd
+service sysinitd /sbin/sysinitd.sh
+    class core
+    user root
+    oneshot
+
+
