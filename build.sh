@@ -146,7 +146,7 @@ fi
 # Normal version #
 ##################
 
-if [ NORMAL = 1 ] 
+if [ $NORMAL = 1 ] 
 then 
 	# Load config
 	echo "Loading config..."
@@ -186,7 +186,7 @@ fi
 # MALI fix version #
 ####################
 
-if [ MALIFIX = 1 ] 
+if [ $MALIFIX = 1 ] 
 then 
 	# Load config
 	echo "Loading config..."
