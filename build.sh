@@ -41,16 +41,14 @@ find -name '*.ko' -exec cp -av {} /home/gemi/git/Harfix3/harfix3/normal/modules/
 cp /home/gemi/git/Harfix3/arch/arm/boot/zImage /home/gemi/git/Harfix3/harfix3/normal/boot/
 
 # copy from harfix3 to ZIP_FILES
-cp /home/gemi/git/Harfix3/harfix3/normal/modules/* /home/gemi/git/Harfix3/harfix3/ZIP_FILES/system/lib/modules/
-cp /home/gemi/git/Harfix3/harfix3/normal/boot/zImage /home/gemi/git/Harfix3/harfix3/ZIP_FILES/boot/bootimg/
+# cp /home/gemi/git/Harfix3/harfix3/normal/modules/* /home/gemi/git/Harfix3/harfix3/ZIP_FILES/system/lib/modules/
+# cp /home/gemi/git/Harfix3/harfix3/normal/boot/zImage /home/gemi/git/Harfix3/harfix3/ZIP_FILES/boot/bootimg/
 
 # zip ZIP_FILES folder
-cd /home/gemi/git/Harfix3/harfix3/ZIP_FILES/
-zip -qry -9 "Harfix3.zip" . -x "*.zip"
-cd /home/gemi/git/Harfix3
+# zip /home/gemi/git/Harfix3/harfix3/Harfix3.zip /home/gemi/git/Harfix3/harfix3/ZIP_FILES/*
 
 # move zip to main Harfix3 folder
-mv /home/gemi/git/Harfix3/harfix3/ZIP_FILES/Harfix3.zip /home/gemi/git/Harfix3/harfix3/
+# mv /home/gemi/git/Harfix3/harfix3/ZIP_FILES/Harfix3.zip /home/gemi/git/Harfix3/harfix3/
 
 
 
@@ -73,22 +71,15 @@ rm /home/gemi/git/Harfix3/harfix3/ZIP_FILES/boot/bootimg/*
 rm /home/gemi/git/Harfix3/harfix3/ZIP_FILES/system/lib/modules/*
 
 # copy from harfix3 to ZIP_FILES
-cp /home/gemi/git/Harfix3/harfix3/MALI_fix/modules/* /home/gemi/git/Harfix3/harfix3/ZIP_FILES/system/lib/modules/
-cp /home/gemi/git/Harfix3/harfix3/MALI_fix/boot/zImage /home/gemi/git/Harfix3/harfix3/ZIP_FILES/boot/bootimg/
+# cp /home/gemi/git/Harfix3/harfix3/MALI_fix/modules/* /home/gemi/git/Harfix3/harfix3/ZIP_FILES/system/lib/modules/
+# cp /home/gemi/git/Harfix3/harfix3/MALI_fix/boot/zImage /home/gemi/git/Harfix3/harfix3/ZIP_FILES/boot/bootimg/
 
 # zip ZIP_FILES folder
-cd /home/gemi/git/Harfix3/harfix3/ZIP_FILES/
-zip -qry -9 "Harfix3-MALI_fix.zip" . -x "*.zip"
-cd /home/gemi/git/Harfix3
+# zip /home/gemi/git/Harfix3/harfix3/Harfix3-MALI_fix.zip /home/gemi/git/Harfix3/harfix3/ZIP_FILES/*
 
 # move zip to main Harfix3 folder
-mv /home/gemi/git/Harfix3/harfix3/ZIP_FILES/Harfix3-MALI_fix.zip /home/gemi/git/Harfix3/harfix3/
+# mv /home/gemi/git/Harfix3/harfix3/ZIP_FILES/Harfix3-MALI_fix.zip /home/gemi/git/Harfix3/harfix3/
 
 # Clean
 rm /home/gemi/git/Harfix3/harfix3/ZIP_FILES/boot/bootimg/*
 rm /home/gemi/git/Harfix3/harfix3/ZIP_FILES/system/lib/modules/*
-rm /home/gemi/git/Harfix3/harfix3/normal/modules/*
-rm /home/gemi/git/Harfix3/harfix3/normal/boot/zImage
-rm /home/gemi/git/Harfix3/harfix3/MALI_fix/modules/*
-rm /home/gemi/git/Harfix3/harfix3/MALI_fix/boot/zImage
-
