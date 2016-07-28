@@ -25,7 +25,7 @@ ini_set("rom_device",           "GT-I9300");
 ##############################Aroma#####################################
 ########################################################################
 
-ini_set("rom_version",          "Alpha2");
+ini_set("rom_version",          "beta1");
 ini_set("rom_date",             "20.07.2016");
 
 ########################################################################
@@ -95,12 +95,12 @@ agreebox(
 	"To start installation you should press OK button."
 );
 
-textbox(
-	"Changelog",
-	"This is full changelog:",
-	"@text",
-	resread("changelog.txt")
-);
+#textbox(
+#	"Changelog",
+#	"This is full changelog:",
+#	"@text",
+#	resread("changelog.txt")
+#);
 
 ########################################################################
 #############################Selectboxes#############################

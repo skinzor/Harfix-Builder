@@ -14,9 +14,15 @@
 
 
 # Possible run options of build.sh 		(1-enabled, 0-disabled)
+# If compile disabled, disable zip too.
 CLEAN=0				# Clean before compile.
 NORMAL=1			# Compile normal version.
+	NORMALZIP=1			# Zip normal version.
 MALIFIX=1			# Compile MALI_fix version.
+	MALIFIXZIP=1		# Zip MALI_fiz version
+VERSION="beta1"		# Version number or name.
+
+
 
 
 # Let's start!
@@ -91,15 +97,6 @@ else
 fi 
 
 # Clean before build
-if [ -e "$KERNELDIR/harfix3/ZIP_FILES/Harfix3-MALI_fix.zip" ] 
-then 
-	echo "ZIP_FILES/Harfix3-MALI_fix.zip exist."
-	rm $KERNELDIR/harfix3/ZIP_FILES/Harfix3-MALI_fix.zip	
-	echo "Deleted."
-else 	
-	echo "ZIP_FILES/Harfix3-MALI_fix.zip not exist."
-fi 
-
 if [ -e "$KERNELDIR/harfix3/ZIP_FILES/Harfix3.zip" ] 
 then 
 	echo "ZIP_FILES/Harfix3.zip exist."
@@ -107,6 +104,24 @@ then
 	echo "Deleted."
 else 	
 	echo "ZIP_FILES/Harfix3.zip not exist."
+fi 
+
+if [ -e "$KERNELDIR/harfix3/Harfix3-$VERSION.zip" ] 
+then 
+	echo "/harfix3/Harfix3-$VERSION.zip exist."
+	$KERNELDIR/harfix3/Harfix3-$VERSION.zip
+	echo "Deleted."
+else 	
+	echo "/harfix3/Harfix3-$VERSION.zip not exist."
+fi 
+
+if [ -e "$KERNELDIR/harfix3/Harfix3-$VERSION-MALI_fix.zip" ] 
+then 
+	echo "/harfix3/Harfix3-$VERSION-MALI_fix.zip exist."
+	$KERNELDIR/harfix3/Harfix3-$VERSION-MALI_fix.zip
+	echo "Deleted."
+else 	
+	echo "/harfix3/Harfix3-$VERSION-MALI_fix.zip not exist."
 fi 
 
 if [ -e "$KERNELDIR/harfix3/ZIP_FILES/boot/bootimg/*" ] 
@@ -166,15 +181,144 @@ then
 	cp $KERNELDIR/arch/arm/boot/zImage $KERNELDIR/harfix3/normal/boot/
 	echo "Done."
 
-	# copy from harfix3 to ZIP_FILES
-	# cp $KERNELDIR/harfix3/normal/modules/* $KERNELDIR/harfix3/ZIP_FILES/system/lib/modules/
-	# cp $KERNELDIR/harfix3/normal/boot/zImage $KERNELDIR/harfix3/ZIP_FILES/boot/bootimg/
+	if [ $NORMALZIP = 1 ]
+	then
+		# copy from harfix3 to ZIP_FILES
+		echo "Coping files for zip..."
+		cp $KERNELDIR/harfix3/normal/modules/ $KERNELDIR/harfix3/ZIP_FILES/system/lib/modules/
+		cp $KERNELDIR/harfix3/normal/boot/zImage $KERNELDIR/harfix3/ZIP_FILES/boot/bootimg/
+		echo "Done,"
 
-	# zip ZIP_FILES folder
-	# zip $KERNELDIR/harfix3/Harfix3.zip $KERNELDIR/harfix3/ZIP_FILES/*
+		echo "Zipping..."
+		# zip ZIP_FILES folder
+		cd $KERNELDIR/harfix3/ZIP_FILES
+		zip $KERNELDIR/harfix3/Harfix3.zip boot
+		zip $KERNELDIR/harfix3/Harfix3.zip boot/bootimg
+		zip $KERNELDIR/harfix3/Harfix3.zip boot/bootimg/zImage
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/update-binary
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma-config
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/ttf
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/ttf/Roboto-Regular.ttf
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/agreement.txt
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/splash
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/splash/material3.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/splash/material2.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/splash/materia1.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/splash/material1.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/splash/material.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/splash/material4.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/splash/material5.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/changelog.txt
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/next.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/install.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/back.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/blue.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/sound.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/info.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/yellow.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/device.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/purple.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/warning.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/agreement.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/green.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/red.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/installbutton.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/welcome.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/pink.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/text.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/dialog.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/radio_on.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/progress_full.9.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/titlebar.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/cb_sel.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/radio_sel.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/aroma-config.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/button_focus.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/icon.menu.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/dialog_titlebar.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/theme.prop
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/button_press.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/navbar.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/progress_empty.9.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/select.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/radio_on_sel.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/button_rest.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/background.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/cb.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/cb_on_sel.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/select_push.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/cb_on.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/radio.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/update-binary-installer
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/updater-script
+		zip $KERNELDIR/harfix3/Harfix3.zip system
+		zip $KERNELDIR/harfix3/Harfix3.zip system/priv-app
+		zip $KERNELDIR/harfix3/Harfix3.zip system/lib
+		zip $KERNELDIR/harfix3/Harfix3.zip system/lib/modules
+		zip $KERNELDIR/harfix3/Harfix3.zip system/lib/modules/dhd.ko
+		zip $KERNELDIR/harfix3/Harfix3.zip system/etc
+		zip $KERNELDIR/harfix3/Harfix3.zip system/etc/init.d
+		zip $KERNELDIR/harfix3/Harfix3.zip system/etc/init.d/S55enable_001bkgputhreshold_020-on_battsave
+		zip $KERNELDIR/harfix3/Harfix3.zip system/etc/init.d/S75enable_001bkintreadspeed_020-512
+		zip $KERNELDIR/harfix3/Harfix3.zip system/etc/init.d/S48enable_001bkschedint_005-row
+		zip $KERNELDIR/harfix3/Harfix3.zip system/etc/init.d/S47enable_001bkgov_016-zzmoove_zzopt
+		zip $KERNELDIR/harfix3/Harfix3.zip system/etc/init.d/S76enable_001bkextreadspeed_030-1024
+		zip $KERNELDIR/harfix3/Harfix3.zip tools
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/bootimgtools
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/cleanup.sh
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/init.agnimounts.rc
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/f2fstat
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/sysinitd.sh
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/mkfs.f2fs
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/rootrw
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/quick_boot.sh
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/e2fsck
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/fs_checker.sh
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/tinyplay
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/busybox
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/mount.exfat
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/psnconfig.sh
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/ntfs-3g
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/make_ext4fs
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/fibmap.f2fs
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/fstab_handler.sh
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/optimise_remounts.sh
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/rootro
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/touchkey_manage.sh
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/sysro
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/fsck.f2fs
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/sysrw
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/agni-init.sh
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/res
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/res/misc
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/res/misc/silence.wav
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/workboot
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/workboot/init-append
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/workboot/system-sysinit-replace
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/workboot/init.rc.patch
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/workboot/sepolicy
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/workboot/init.smdk4x12-append
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/reseter.sh
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/PSN_AGNi_builder.sh
+		cd $KERNELDIR
 
-	# move zip to main Harfix3 folder
-	# mv $KERNELDIR/harfix3/ZIP_FILES/Harfix3.zip $KERNELDIR/harfix3/
+		# move zip to main Harfix3 folder
+		mv $KERNELDIR/harfix3/ZIP_FILES/Harfix3.zip $KERNELDIR/harfix3/
+		# Rename it
+		mv $KERNELDIR/harfix3/Harfix3.zip $KERNELDIR/harfix3/Harfix3-$VERSION.zip
+	fi
+		echo "Done."
+	
 	echo "Done Normal version."
 else
 	echo "skipped normal version."
@@ -206,16 +350,147 @@ then
 	cp $KERNELDIR/arch/arm/boot/zImage $KERNELDIR/harfix3/MALI_fix/boot/
 	echo "Done."
 
-	# Remove old files
-	# rm $KERNELDIR/harfix3/ZIP_FILES/boot/bootimg/*
-	# rm $KERNELDIR/harfix3/ZIP_FILES/system/lib/modules/*
+	# Remove other files
+	rm $KERNELDIR/harfix3/ZIP_FILES/boot/bootimg/*
+	rm $KERNELDIR/harfix3/ZIP_FILES/system/lib/modules/*
 
-	# copy from harfix3 to ZIP_FILES
-	# cp $KERNELDIR/harfix3/MALI_fix/modules/* $KERNELDIR/harfix3/ZIP_FILES/system/lib/modules/
-	# cp $KERNELDIR/harfix3/MALI_fix/boot/zImage $KERNELDIR/harfix3/ZIP_FILES/boot/bootimg/
+		if [ $MALIFIXZIP = 1 ]
+	then
+		# copy from harfix3 to ZIP_FILES
+		echo "Coping files for zip..."
+		cp $KERNELDIR/harfix3/MALI_fix/modules/* $KERNELDIR/harfix3/ZIP_FILES/system/lib/modules/
+		cp $KERNELDIR/harfix3/MALI_fix/boot/zImage $KERNELDIR/harfix3/ZIP_FILES/boot/bootimg/
+		echo "Done,"
 
-	# zip ZIP_FILES folder
-	# zip $KERNELDIR/harfix3/Harfix3-MALI_fix.zip $KERNELDIR/harfix3/ZIP_FILES/*
+		echo "Zipping..."
+		# zip ZIP_FILES folder
+		cd $KERNELDIR/harfix3/ZIP_FILES
+		zip $KERNELDIR/harfix3/Harfix3.zip boot
+		zip $KERNELDIR/harfix3/Harfix3.zip boot/bootimg
+		zip $KERNELDIR/harfix3/Harfix3.zip boot/bootimg/zImage
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/update-binary
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma-config
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/ttf
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/ttf/Roboto-Regular.ttf
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/agreement.txt
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/splash
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/splash/material3.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/splash/material2.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/splash/materia1.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/splash/material1.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/splash/material.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/splash/material4.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/splash/material5.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/changelog.txt
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/next.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/install.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/back.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/blue.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/sound.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/info.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/yellow.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/device.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/purple.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/warning.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/agreement.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/green.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/red.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/installbutton.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/welcome.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/pink.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/icons/text.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/dialog.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/radio_on.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/progress_full.9.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/titlebar.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/cb_sel.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/radio_sel.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/aroma-config.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/button_focus.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/icon.menu.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/dialog_titlebar.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/theme.prop
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/button_press.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/navbar.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/progress_empty.9.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/select.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/radio_on_sel.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/button_rest.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/background.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/cb.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/cb_on_sel.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/select_push.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/cb_on.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/aroma/themes/material_green/radio.png
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/update-binary-installer
+		zip $KERNELDIR/harfix3/Harfix3.zip META-INF/com/google/android/updater-script
+		zip $KERNELDIR/harfix3/Harfix3.zip system
+		zip $KERNELDIR/harfix3/Harfix3.zip system/priv-app
+		zip $KERNELDIR/harfix3/Harfix3.zip system/lib
+		zip $KERNELDIR/harfix3/Harfix3.zip system/lib/modules
+		zip $KERNELDIR/harfix3/Harfix3.zip system/lib/modules/dhd.ko
+		zip $KERNELDIR/harfix3/Harfix3.zip system/etc
+		zip $KERNELDIR/harfix3/Harfix3.zip system/etc/init.d
+		zip $KERNELDIR/harfix3/Harfix3.zip system/etc/init.d/S55enable_001bkgputhreshold_020-on_battsave
+		zip $KERNELDIR/harfix3/Harfix3.zip system/etc/init.d/S75enable_001bkintreadspeed_020-512
+		zip $KERNELDIR/harfix3/Harfix3.zip system/etc/init.d/S48enable_001bkschedint_005-row
+		zip $KERNELDIR/harfix3/Harfix3.zip system/etc/init.d/S47enable_001bkgov_016-zzmoove_zzopt
+		zip $KERNELDIR/harfix3/Harfix3.zip system/etc/init.d/S76enable_001bkextreadspeed_030-1024
+		zip $KERNELDIR/harfix3/Harfix3.zip tools
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/bootimgtools
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/cleanup.sh
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/init.agnimounts.rc
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/f2fstat
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/sysinitd.sh
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/mkfs.f2fs
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/rootrw
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/quick_boot.sh
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/e2fsck
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/fs_checker.sh
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/tinyplay
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/busybox
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/mount.exfat
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/psnconfig.sh
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/ntfs-3g
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/make_ext4fs
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/fibmap.f2fs
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/fstab_handler.sh
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/optimise_remounts.sh
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/rootro
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/touchkey_manage.sh
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/sysro
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/fsck.f2fs
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/sysrw
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/sbin/agni-init.sh
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/res
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/res/misc
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/packing/res/misc/silence.wav
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/workboot
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/workboot/init-append
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/workboot/system-sysinit-replace
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/workboot/init.rc.patch
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/workboot/sepolicy
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/workboot/init.smdk4x12-append
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/reseter.sh
+		zip $KERNELDIR/harfix3/Harfix3.zip tools/PSN_AGNi_builder.sh
+		cd $KERNELDIR
+
+		# move zip to main Harfix3 folder
+		mv $KERNELDIR/harfix3/ZIP_FILES/Harfix3.zip $KERNELDIR/harfix3/
+
+		# Rename it
+		mv $KERNELDIR/harfix3/Harfix3.zip $KERNELDIR/harfix3/Harfix3-$VERSION-MALI_fix.zip
+	fi
 
 	# move zip to main Harfix3 folder
 	# mv $KERNELDIR/harfix3/ZIP_FILES/Harfix3-MALI_fix.zip $KERNELDIR/harfix3/
