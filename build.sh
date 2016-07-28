@@ -12,18 +12,23 @@
 
 # Let's start!
 
+
+# Shortcuts  EDIT THIS!
+KERNELDIR=/home/gemi/git/Harfix3
+TCDIR=/home/gemi/TC
+
 # Clean before build
-rm /home/gemi/git/Harfix3/harfix3/ZIP_FILES/Harfix3-MALI_fix.zip
-rm /home/gemi/git/Harfix3/harfix3/ZIP_FILES/Harfix3.zip
-rm /home/gemi/git/Harfix3/harfix3/ZIP_FILES/boot/bootimg/*
-rm /home/gemi/git/Harfix3/harfix3/ZIP_FILES/system/lib/modules/*
+rm $KERNELDIR/harfix3/ZIP_FILES/Harfix3-MALI_fix.zip
+rm $KERNELDIR/harfix3/ZIP_FILES/Harfix3.zip
+rm $KERNELDIR/harfix3/ZIP_FILES/boot/bootimg/*
+rm $KERNELDIR/harfix3/ZIP_FILES/system/lib/modules/*
 
 # Prepering
 export ARCH=arm
-export CROSS_COMPILE=/home/gemi/TC/gcc-linaro-5.3-2016.02/bin/arm-linux-gnueabihf-
+export CROSS_COMPILE=$TCDIR/gcc-linaro-5.3-2016.02/bin/arm-linux-gnueabihf-
 
 # Cleaning
-make clean
+# make clean
 
 
 ##################
@@ -37,18 +42,18 @@ make custom_i9300_defconfig
 make -j4
 
 # Move compiled files to harfix3 folder
-find -name '*.ko' -exec cp -av {} /home/gemi/git/Harfix3/harfix3/normal/modules/ \;
-cp /home/gemi/git/Harfix3/arch/arm/boot/zImage /home/gemi/git/Harfix3/harfix3/normal/boot/
+find -name '*.ko' -exec cp -av {} $KERNELDIR/harfix3/normal/modules/ \;
+cp $KERNELDIR/arch/arm/boot/zImage $KERNELDIR/harfix3/normal/boot/
 
 # copy from harfix3 to ZIP_FILES
-# cp /home/gemi/git/Harfix3/harfix3/normal/modules/* /home/gemi/git/Harfix3/harfix3/ZIP_FILES/system/lib/modules/
-# cp /home/gemi/git/Harfix3/harfix3/normal/boot/zImage /home/gemi/git/Harfix3/harfix3/ZIP_FILES/boot/bootimg/
+# cp $KERNELDIR/harfix3/normal/modules/* $KERNELDIR/harfix3/ZIP_FILES/system/lib/modules/
+# cp $KERNELDIR/harfix3/normal/boot/zImage $KERNELDIR/harfix3/ZIP_FILES/boot/bootimg/
 
 # zip ZIP_FILES folder
-# zip /home/gemi/git/Harfix3/harfix3/Harfix3.zip /home/gemi/git/Harfix3/harfix3/ZIP_FILES/*
+# zip $KERNELDIR/harfix3/Harfix3.zip $KERNELDIR/harfix3/ZIP_FILES/*
 
 # move zip to main Harfix3 folder
-# mv /home/gemi/git/Harfix3/harfix3/ZIP_FILES/Harfix3.zip /home/gemi/git/Harfix3/harfix3/
+# mv $KERNELDIR/harfix3/ZIP_FILES/Harfix3.zip $KERNELDIR/harfix3/
 
 
 
@@ -63,23 +68,23 @@ make custom_mali_fix_i9300_defconfig
 make -j4
 
 # Move compiled files to harfix3 folder (MALI fix)
-find -name '*.ko' -exec cp -av {} /home/gemi/git/Harfix3/harfix3/MALI_fix/modules/ \;
-cp /home/gemi/git/Harfix3/arch/arm/boot/zImage /home/gemi/git/Harfix3/harfix3/MALI_fix/boot/
+find -name '*.ko' -exec cp -av {} $KERNELDIR/harfix3/MALI_fix/modules/ \;
+cp $KERNELDIR/arch/arm/boot/zImage $KERNELDIR/harfix3/MALI_fix/boot/
 
 # Remove old files
-rm /home/gemi/git/Harfix3/harfix3/ZIP_FILES/boot/bootimg/*
-rm /home/gemi/git/Harfix3/harfix3/ZIP_FILES/system/lib/modules/*
+rm $KERNELDIR/harfix3/ZIP_FILES/boot/bootimg/*
+rm $KERNELDIR/harfix3/ZIP_FILES/system/lib/modules/*
 
 # copy from harfix3 to ZIP_FILES
-# cp /home/gemi/git/Harfix3/harfix3/MALI_fix/modules/* /home/gemi/git/Harfix3/harfix3/ZIP_FILES/system/lib/modules/
-# cp /home/gemi/git/Harfix3/harfix3/MALI_fix/boot/zImage /home/gemi/git/Harfix3/harfix3/ZIP_FILES/boot/bootimg/
+# cp $KERNELDIR/harfix3/MALI_fix/modules/* $KERNELDIR/harfix3/ZIP_FILES/system/lib/modules/
+# cp $KERNELDIR/harfix3/MALI_fix/boot/zImage $KERNELDIR/harfix3/ZIP_FILES/boot/bootimg/
 
 # zip ZIP_FILES folder
-# zip /home/gemi/git/Harfix3/harfix3/Harfix3-MALI_fix.zip /home/gemi/git/Harfix3/harfix3/ZIP_FILES/*
+# zip $KERNELDIR/harfix3/Harfix3-MALI_fix.zip $KERNELDIR/harfix3/ZIP_FILES/*
 
 # move zip to main Harfix3 folder
-# mv /home/gemi/git/Harfix3/harfix3/ZIP_FILES/Harfix3-MALI_fix.zip /home/gemi/git/Harfix3/harfix3/
+# mv $KERNELDIR/harfix3/ZIP_FILES/Harfix3-MALI_fix.zip $KERNELDIR/harfix3/
 
 # Clean
-rm /home/gemi/git/Harfix3/harfix3/ZIP_FILES/boot/bootimg/*
-rm /home/gemi/git/Harfix3/harfix3/ZIP_FILES/system/lib/modules/*
+rm $KERNELDIR/harfix3/ZIP_FILES/boot/bootimg/*
+rm $KERNELDIR/harfix3/ZIP_FILES/system/lib/modules/*
