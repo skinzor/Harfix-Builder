@@ -7,24 +7,24 @@
 ####################################
 #				2016
 #
-# Build script for Harfix3 kernel for i9300
+# Build script for Harfix3 kernel for i9300.
 # By wisniew99 / rafciowis1999
 # You can use and edit this as You want. :)
-# Please save orginal author.
+# But please save orginal author.
 #
 # REMEMBER TO EDIT LOCATIONS!!!
 
 
-# Possible run options of build.sh: 		(1-enabled, 0-disabled)
+# Possible options to run: 		(1-enabled, 0-disabled)
 CLEAN=0				# Clean before compile.
 NORMAL=1			# Compile normal version.
 	NORMALZIP=1			# Zip normal version.
 SECCLEAN=0			# Clean before next version
 MALIFIX=1			# Compile MALI_fix version.
-	MALIFIXZIP=1		# Zip MALI_fiz version
+	MALIFIXZIP=1		# Zip MALI_fix version.
 THICLEAN=0			# Clean after last version.
 VERSION="beta1"		# Version number or name.
-# If compile disabled, disable zip too.
+# If compile disabled, zip is disabled too.
 
 
 # Shortcuts  EDIT THIS!
