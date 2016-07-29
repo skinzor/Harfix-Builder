@@ -22,6 +22,7 @@ NORMAL=1			# Compile normal version.
 SECCLEAN=0			# Clean before next version
 MALIFIX=1			# Compile MALI_fix version.
 	MALIFIXZIP=1		# Zip MALI_fiz version
+THICLEAN=0			# Clean after last version.
 VERSION="beta1"		# Version number or name.
 # If compile disabled, disable zip too.
 
@@ -33,6 +34,13 @@ TCDIR=/home/gemi/TC
 
 
 # Let's start!
+
+# Date.
+DATE=`date +%d.%m.%Y`
+
+# Add date to installer
+sed -i '29d' $KERNELDIR/harfix3/ZIP_FILES/META-INF/com/google/android/aroma-config
+sed -i '29i\ini_set("rom_date",             "$DATE");' $KERNELDIR/harfix3/ZIP_FILES/META-INF/com/google/android/aroma-config
 
 
 # Create folders.
@@ -170,6 +178,13 @@ fi
 
 if [ $NORMAL = 1 ] 
 then 
+
+	# Changing version for normal version.
+	sed -i '41d' $KERNELDIR/arch/arm/configs/custom_i9300_defconfig
+	sed -i '41i\CONFIG_LOCALVERSION="-Harfix3-$VERSION"' $KERNELDIR/arch/arm/configs/custom_i9300_defconfig
+	sed -i '28d' $KERNELDIR/harfix3/ZIP_FILES/META-INF/com/google/android/aroma-config
+	sed -i '28i\ini_set("rom_version",          "$VERSION");' $KERNELDIR/harfix3/ZIP_FILES/META-INF/com/google/android/aroma-config
+
 	# Load config.
 	echo "Loading config..."
 	make custom_i9300_defconfig
@@ -352,6 +367,13 @@ fi
 
 if [ $MALIFIX = 1 ] 
 then 
+
+	# Change version for MALI_fix.
+	sed -i '50d' $KERNELDIR/arch/arm/configs/custom_mali_fix_i9300_defconfig
+	sed -i '50i\CONFIG_LOCALVERSION="-Harfix3-$VERSION-fix"' $KERNELDIR/arch/arm/configs/custom_mali_fix_i9300_defconfig
+	sed -i '28d' $KERNELDIR/harfix3/ZIP_FILES/META-INF/com/google/android/aroma-config
+	sed -i '28i\ini_set("rom_version",          "$VERSION-fix");' $KERNELDIR/harfix3/ZIP_FILES/META-INF/com/google/android/aroma-config
+
 	# Load config.
 	echo "Loading config..."
 	make custom_mali_fix_i9300_defconfig
@@ -517,6 +539,21 @@ then
 else 	
 	echo "Skipped MALI_fix version."
 fi 
+
+#################
+## Third clean ##
+#################
+
+# Cleaning.
+if [ $THICLEAN = 1 ]
+then
+	echo "Cleaning..."
+	make -j4 clean
+	make -j4 mrproper
+	echo "Cleaned."
+else
+	echo "Clean skipped."
+fi
 
 # Clean
 
