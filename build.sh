@@ -1,43 +1,46 @@
 #!/bin/bash
 
 ####################################
+##                                ##
+###     Harfix3 build script     ###
+##                                ##
 ####################################
-####### Harfix3 build script #######
-####################################
-####################################
-
+#				2016
+#
 # Build script for Harfix3 kernel for i9300
-# by wisniew99 / rafciowis1999
+# By wisniew99 / rafciowis1999
 # You can use and edit this as You want. :)
-
+# Please save orginal author.
+#
 # REMEMBER TO EDIT LOCATIONS!!!
 
 
-# Possible run options of build.sh 		(1-enabled, 0-disabled)
-# If compile disabled, disable zip too.
+# Possible run options of build.sh: 		(1-enabled, 0-disabled)
 CLEAN=0				# Clean before compile.
 NORMAL=1			# Compile normal version.
 	NORMALZIP=1			# Zip normal version.
+SECCLEAN=0			# Clean before next version
 MALIFIX=1			# Compile MALI_fix version.
 	MALIFIXZIP=1		# Zip MALI_fiz version
 VERSION="beta1"		# Version number or name.
-
-
-
-
-# Let's start!
+# If compile disabled, disable zip too.
 
 
 # Shortcuts  EDIT THIS!
 KERNELDIR=/home/gemi/git/Harfix3
 TCDIR=/home/gemi/TC
 
-# Create folders
+
+
+# Let's start!
+
+
+# Create folders.
 if [ -e "$KERNELDIR/harfix3" ] 
 then 
 	echo "harfix3 exist."
 else 	
-	echo "Harfix3 not exist."
+	echo "harfix3 not exist."
 	mkdir $KERNELDIR/harfix3
 	echo "Done."
 fi 
@@ -46,7 +49,7 @@ if [ -e "$KERNELDIR/harfix3/normal" ]
 then 
 	echo "harfix3/normal exist."
 else 	
-	echo "Harfix3/normal not exist."
+	echo "harfix3/normal not exist."
 	mkdir $KERNELDIR/harfix3/normal
 	echo "Done."
 fi 
@@ -55,7 +58,7 @@ if [ -e "$KERNELDIR/harfix3/normal/boot" ]
 then 
 	echo "harfix3/normal/boot exist."
 else 	
-	echo "Harfix3/normal/boot not exist."
+	echo "harfix3/normal/boot not exist."
 	mkdir $KERNELDIR/harfix3/normal/boot
 	echo "Done."
 fi 
@@ -64,7 +67,7 @@ if [ -e "$KERNELDIR/harfix3/normal/modules" ]
 then 
 	echo "harfix3/normal/modules exist."
 else 	
-	echo "Harfix3/normal/modules not exist."
+	echo "harfix3/normal/modules not exist."
 	mkdir $KERNELDIR/harfix3/normal/modules
 	echo "Done."
 fi 
@@ -73,7 +76,7 @@ if [ -e "$KERNELDIR/harfix3/MALI_fix" ]
 then 
 	echo "harfix3/MALI_fix exist."
 else 	
-	echo "Harfix3/MALI_fix not exist."
+	echo "harfix3/MALI_fix not exist."
 	mkdir $KERNELDIR/harfix3/MALI_fix
 	echo "Done."
 fi 
@@ -82,7 +85,7 @@ if [ -e "$KERNELDIR/harfix3/MALI_fix/boot" ]
 then 
 	echo "harfix3/MALI_fix/boot exist."
 else 	
-	echo "Harfix3/MALI_fix/boot not exist."
+	echo "harfix3/MALI_fix/boot not exist."
 	mkdir $KERNELDIR/harfix3/MALI_fix/boot
 	echo "Done."
 fi 
@@ -92,11 +95,11 @@ then
 	echo "harfix3/MALI_fix/modules exist."
 else 	
 	echo "Harfix3/MALI_fix/modules not exist."
-	mkdir $KERNELDIR/harfix3/MALI_fix/modules
+	mkdir hKERNELDIR/harfix3/MALI_fix/modules
 	echo "Done."
 fi 
 
-# Clean before build
+# Clean before build.
 if [ -e "$KERNELDIR/harfix3/ZIP_FILES/Harfix3.zip" ] 
 then 
 	echo "ZIP_FILES/Harfix3.zip exist."
@@ -142,11 +145,15 @@ else
 	echo "ZIP_FILES/system/lib/modules/* not exist."
 fi 
 
-# Prepering
+# Prepering.
 export ARCH=arm
 export CROSS_COMPILE=$TCDIR/gcc-linaro-5.3-2016.02/bin/arm-linux-gnueabihf-
 
-# Cleaning
+###########
+## Clean ##
+###########
+
+# Cleaning.
 if [ $CLEAN = 1 ]
 then
 	echo "Cleaning..."
@@ -157,23 +164,23 @@ else
 	echo "Clean skipped."
 fi
 
-##################
-# Normal version #
-##################
+####################
+## Normal version ##
+####################
 
 if [ $NORMAL = 1 ] 
 then 
-	# Load config
+	# Load config.
 	echo "Loading config..."
 	make custom_i9300_defconfig
 	echo "Done."
 
-	# Compile
+	# Compile.
 	echo "Compiling..."
 	make -j4
 	echo "Done."
 
-	# Move compiled files to harfix3 folder
+	# Move compiled files to harfix3 folder.
 	echo "Coping modules..."
 	find -name '*.ko' -exec cp -av {} $KERNELDIR/harfix3/normal/modules/ \;
 	echo "Done."
@@ -183,15 +190,15 @@ then
 
 	if [ $NORMALZIP = 1 ]
 	then
-		# copy from harfix3 to ZIP_FILES
+		# Copy from harfix3 to ZIP_FILES.
 		echo "Coping files for zip..."
 		cp $KERNELDIR/harfix3/normal/modules/ $KERNELDIR/harfix3/ZIP_FILES/system/lib/modules/
 		cp $KERNELDIR/harfix3/normal/boot/zImage $KERNELDIR/harfix3/ZIP_FILES/boot/bootimg/
 		echo "Done,"
 
 		echo "Zipping..."
-		# zip ZIP_FILES folder
-		cd $KERNELDIR/harfix3/ZIP_FILES
+		# zip ZIP_FILES folder.
+		cd $ZERNELDIR/harfix3/ZIP_FILES
 		zip $KERNELDIR/harfix3/Harfix3.zip boot
 		zip $KERNELDIR/harfix3/Harfix3.zip boot/bootimg
 		zip $KERNELDIR/harfix3/Harfix3.zip boot/bootimg/zImage
@@ -312,37 +319,50 @@ then
 		zip $KERNELDIR/harfix3/Harfix3.zip tools/PSN_AGNi_builder.sh
 		cd $KERNELDIR
 
-		# move zip to main Harfix3 folder
+		# Move zip to main Harfix3 folder.
 		mv $KERNELDIR/harfix3/ZIP_FILES/Harfix3.zip $KERNELDIR/harfix3/
-		# Rename it
+		# Rename new zip.
 		mv $KERNELDIR/harfix3/Harfix3.zip $KERNELDIR/harfix3/Harfix3-$VERSION.zip
-	fi
 		echo "Done."
+	fi
 	
 	echo "Done Normal version."
 else
-	echo "skipped normal version."
+	echo "Skipped normal version."
 fi
 
+##################
+## Second clean ##
+##################
 
+# Cleaning.
+if [ $SECCLEAN = 1 ]
+then
+	echo "Cleaning..."
+	make -j4 clean
+	make -j4 mrproper
+	echo "Cleaned."
+else
+	echo "Clean skipped."
+fi
 
-####################
-# MALI fix version #
-####################
+######################
+## MALI fix version ##
+######################
 
 if [ $MALIFIX = 1 ] 
 then 
-	# Load config
+	# Load config.
 	echo "Loading config..."
 	make custom_mali_fix_i9300_defconfig
 	echo "Done."
 
-	# Second compile
+	# Second compile.
 	echo "Compiling..."
 	make -j4
 	echo "Done."
 
-	# Move compiled files to harfix3 folder
+	# Move compiled files to harfix3 folder.
 	echo "Coping modules..."
 	find -name '*.ko' -exec cp -av {} $KERNELDIR/harfix3/MALI_fix/modules/ \;
 	echo "Done."
@@ -350,20 +370,20 @@ then
 	cp $KERNELDIR/arch/arm/boot/zImage $KERNELDIR/harfix3/MALI_fix/boot/
 	echo "Done."
 
-	# Remove other files
+	# Remove other files.
 	rm $KERNELDIR/harfix3/ZIP_FILES/boot/bootimg/*
 	rm $KERNELDIR/harfix3/ZIP_FILES/system/lib/modules/*
 
 		if [ $MALIFIXZIP = 1 ]
 	then
-		# copy from harfix3 to ZIP_FILES
+		# Copy from harfix3 to ZIP_FILES.
 		echo "Coping files for zip..."
 		cp $KERNELDIR/harfix3/MALI_fix/modules/* $KERNELDIR/harfix3/ZIP_FILES/system/lib/modules/
 		cp $KERNELDIR/harfix3/MALI_fix/boot/zImage $KERNELDIR/harfix3/ZIP_FILES/boot/bootimg/
 		echo "Done,"
 
 		echo "Zipping..."
-		# zip ZIP_FILES folder
+		# Zip ZIP_FILES folder.
 		cd $KERNELDIR/harfix3/ZIP_FILES
 		zip $KERNELDIR/harfix3/Harfix3.zip boot
 		zip $KERNELDIR/harfix3/Harfix3.zip boot/bootimg
@@ -485,15 +505,14 @@ then
 		zip $KERNELDIR/harfix3/Harfix3.zip tools/PSN_AGNi_builder.sh
 		cd $KERNELDIR
 
-		# move zip to main Harfix3 folder
+		# Move zip to main Harfix3 folder.
 		mv $KERNELDIR/harfix3/ZIP_FILES/Harfix3.zip $KERNELDIR/harfix3/
 
-		# Rename it
+		# Rename new zip.
 		mv $KERNELDIR/harfix3/Harfix3.zip $KERNELDIR/harfix3/Harfix3-$VERSION-MALI_fix.zip
+		echo "Done."
 	fi
 
-	# move zip to main Harfix3 folder
-	# mv $KERNELDIR/harfix3/ZIP_FILES/Harfix3-MALI_fix.zip $KERNELDIR/harfix3/
 	echo "Done 	MALI_fix version."
 else 	
 	echo "Skipped MALI_fix version."
