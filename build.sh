@@ -16,10 +16,10 @@
 
 
 # Possible options to run: 	(1-enabled, 0-disabled)
-CLEAN=0				# Clean before compile.
-NORMAL=0			# Compile normal version.
+CLEAN=1				# Clean before compile.
+NORMAL=1			# Compile normal version.
     NORMALZIP=1                     # Zip normal version.
-SECCLEAN=0			# Clean before next version
+SECCLEAN=1			# Clean before next version
 MALIFIX=1			# Compile MALI_fix version.
     MALIFIXZIP=1                    # Zip MALI_fix version.
 THICLEAN=0			# Clean after last version.
@@ -61,7 +61,7 @@ then
 else
     echo "harfix3/normal not exist."
     mkdir $KERNELDIR/harfix3/normal
-    echo "harfix3/normal created."
+    echo "Created."
 fi
 
 if [ -e "$KERNELDIR/harfix3/normal/boot" ]
@@ -70,7 +70,7 @@ then
 else
     echo "harfix3/normal/boot not exist."
     mkdir $KERNELDIR/harfix3/normal/boot
-    echo "normal/boot created."
+    echo "Created."
 fi
 
 if [ -e "$KERNELDIR/harfix3/normal/modules" ]
@@ -79,7 +79,7 @@ then
 else
     echo "harfix3/normal/modules not exist."
     mkdir $KERNELDIR/harfix3/normal/modules
-    echo "normal/modules created."
+    echo "Created."
 fi
 
 if [ -e "$KERNELDIR/harfix3/MALI_fix" ]
@@ -88,7 +88,7 @@ then
 else
     echo "harfix3/MALI_fix not exist."
     mkdir $KERNELDIR/harfix3/MALI_fix
-    echo "harfix3/MALI_fix created."
+    echo "Created."
 fi
 
 if [ -e "$KERNELDIR/harfix3/MALI_fix/boot" ]
@@ -97,7 +97,7 @@ then
 else
     echo "harfix3/MALI_fix/boot not exist."
     mkdir $KERNELDIR/harfix3/MALI_fix/boot
-    echo "MALI_fix/boot created."
+    echo "Created."
 fi
 
 if [ -e "$KERNELDIR/harfix3/MALI_fix/modules" ]
@@ -106,7 +106,7 @@ then
 else
     echo "harfix3/MALI_fix/modules not exist."
     mkdir $KERNELDIR/harfix3/MALI_fix/modules
-    echo "MALI_fix/modules created."
+    echo "Created."
 fi
 
 if [ -e "$KERNELDIR/harfix3/ZIP_FILES/system/lib" ]
@@ -115,7 +115,7 @@ then
 else
     echo "ZIP_FILES/system/lib not exist."
     mkdir $KERNELDIR/harfix3/ZIP_FILES/system/lib
-    echo "ZIP_FILES/system/lib created."
+    echo "Created."
 fi
 
 if [ -e "$KERNELDIR/harfix3/ZIP_FILES/system/lib/modules" ]
@@ -124,7 +124,7 @@ then
 else
     echo "ZIP_FILES/system/lib/modules not exist."
     mkdir $KERNELDIR/harfix3/ZIP_FILES/system/lib/modules
-    echo "ZIP_FILES/system/lib/modules created."
+    echo "Created."
 fi
 
 if [ -e "$KERNELDIR/harfix3/ZIP_FILES/boot" ]
@@ -133,7 +133,7 @@ then
 else
     echo "harfix3/ZIP_FILES/boot not exist."
     mkdir $KERNELDIR/harfix3/ZIP_FILES/boot
-    echo "harfix3/ZIP_FILES/boot created."
+    echo "Created."
 fi
 
 if [ -e "$KERNELDIR/harfix3/ZIP_FILES/boot/bootimg" ]
@@ -158,7 +158,7 @@ fi
 if [ -e "$KERNELDIR/harfix3/ZIP_FILES/Harfix3.zip" ]
 then
     echo "ZIP_FILES/Harfix3.zip exist."
-    rm $KERNELDIR/harfix3/ZIP_FILES/Harfix3.zip
+    rm -rf $KERNELDIR/harfix3/ZIP_FILES/Harfix3.zip
     echo "Deleted."
 else
     echo "ZIP_FILES/Harfix3.zip not exist."
@@ -167,7 +167,7 @@ fi
 if [ -e "$KERNELDIR/harfix3/Harfix3-$VERSION.zip" ]
 then
     echo "/harfix3/Harfix3-$VERSION.zip exist."
-    rm $KERNELDIR/harfix3/Harfix3-$VERSION.zip
+    rm -rf $KERNELDIR/harfix3/Harfix3-$VERSION.zip
     echo "Deleted."
 else
     echo "/harfix3/Harfix3-$VERSION.zip not exist."
@@ -176,7 +176,7 @@ fi
 if [ -e "$KERNELDIR/harfix3/Harfix3-$VERSION-MALI_fix.zip" ]
 then
     echo "/harfix3/Harfix3-$VERSION-MALI_fix.zip exist."
-    rm $KERNELDIR/harfix3/Harfix3-$VERSION-MALI_fix.zip
+    rm -rf $KERNELDIR/harfix3/Harfix3-$VERSION-MALI_fix.zip
     echo "Deleted."
 else
     echo "/harfix3/Harfix3-$VERSION-MALI_fix.zip not exist."
@@ -185,7 +185,7 @@ fi
 if [ -e "$KERNELDIR/harfix3/ZIP_FILES/boot/bootimg/*" ]
 then
     echo "ZIP_FILES/boot/bootimg/* exist."
-    rm $KERNELDIR/harfix3/ZIP_FILES/boot/bootimg/*
+    rm -rf $KERNELDIR/harfix3/ZIP_FILES/boot/bootimg/*
     echo "Deleted."
 else
     echo "ZIP_FILES/boot/bootimg/* not exist."
@@ -194,7 +194,7 @@ fi
 if [ -e "$KERNELDIR/harfix3/ZIP_FILES/system/lib/modules/*" ]
 then
     echo "ZIP_FILES/system/lib/modules/* exist."
-    rm $KERNELDIR/harfix3/ZIP_FILES/system/lib/modules/*
+    rm -rf $KERNELDIR/harfix3/ZIP_FILES/system/lib/modules/*
     echo "Deleted."
 else
     echo "ZIP_FILES/system/lib/modules/* not exist."
@@ -339,9 +339,9 @@ then
     cp $KERNELDIR/arch/arm/boot/zImage $KERNELDIR/harfix3/MALI_fix/boot/
     echo "Done."
 
-    # Remove other files.
-    rm $KERNELDIR/harfix3/ZIP_FILES/boot/bootimg/
-    rm $KERNELDIR/harfix3/ZIP_FILES/system/lib/modules/
+    # Remove older files.
+    rm -rf $KERNELDIR/harfix3/ZIP_FILES/boot/bootimg/*
+    rm -rf $KERNELDIR/harfix3/ZIP_FILES/system/lib/modules/*
 
     if [ $MALIFIXZIP = 1 ]
     then
@@ -383,25 +383,6 @@ then
     echo "Cleaned."
 else
     echo "Clean skipped."
-fi
-
-# Clean after script.
-if [ -e "$KERNELDIR/harfix3/ZIP_FILES/boot/bootimg/*" ]
-then
-    echo "ZIP_FILES/boot/bootimg/* exist."
-    rm $KERNELDIR/harfix3/ZIP_FILES/boot/bootimg/*
-    echo "Deleted."
-else
-    echo "ZIP_FILES/boot/bootimg/* not exist."
-fi
-
-if [ -e "$KERNELDIR/harfix3/ZIP_FILES/system/lib/modules/*" ]
-then
-    echo "ZIP_FILES/system/lib/modules/* exist."
-    rm $KERNELDIR/harfix3/ZIP_FILES/system/lib/modules/*
-    echo "Deleted."
-else
-    echo "ZIP_FILES/system/lib/modules/* not exist."
 fi
 
 echo "DONE!"
