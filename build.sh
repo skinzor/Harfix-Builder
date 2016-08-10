@@ -16,10 +16,10 @@
 
 
 # Possible options to run: 	(1-enabled, 0-disabled)
-CLEAN=1				# Clean before compile.
+CLEAN=0				# Clean before compile.
 NORMAL=1			# Compile normal version.
     NORMALZIP=1                     # Zip normal version.
-SECCLEAN=1			# Clean before next version
+SECCLEAN=0			# Clean before next version
 MALIFIX=1			# Compile MALI_fix version.
     MALIFIXZIP=1                    # Zip MALI_fix version.
 THICLEAN=0			# Clean after last version.
@@ -283,7 +283,7 @@ then
 
         echo "Zipping..."
         # zip ZIP_FILES folder.
-        cd $ZERNELDIR/harfix3/ZIP_FILES
+        cd $KERNELDIR/harfix3/ZIP_FILES
         zip -r Harfix3.zip *
         cd $KERNELDIR
 
