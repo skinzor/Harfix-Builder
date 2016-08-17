@@ -29,8 +29,11 @@ SECCLEAN=0			# Clean before next version.#
 MALIFIX=0			# Compile MALI_fix version. #
     MALIFIXZIP=1                    # Zip MALI_fix version. #
 THICLEAN=0			# Clean after last version. #
+STOCK=1
+	STOCKZIP=1
+FOUCLEAN=0
 PRONAME="Harfix3"               # Name for folders, files.  #
-VERSION="1.0"                   # Version number or name.   #
+VERSION="1.1"                   # Version number or name.   #
 # If compile is disabled, zip is disabled too.              #
 #############################################################
 #                                                           #
@@ -52,6 +55,7 @@ TCEND="bin/arm-linux-gnueabihf-"    # Toolchain end of name         #
 #                                                                                    #
 CONFIGNORMAL=custom_i9300_defconfig             # Standard config                    #
 CONFIGMALIFIX=custom_mali_fix_i9300_defconfig   # Standard config with broken fences #
+CONFIGSTOCK=custom_stock_i9300_defconfig		# Standard config for stock ROMs	 #
 #                                                                                    #
 ######################################################################################
 #                                                                                    #
@@ -209,6 +213,15 @@ then
     echo "${grn} Deleted. ${txtrst}"
 else
     echo "${bldblu} $PRONAME-$VERSION-MALI_fix.zip${txtrst}${blu} not exist. ${txtrst}"
+fi
+
+if [ -e "$PRONAME/$PRONAME-$VERSION-stock.zip" ]
+then
+    echo "${ylw} $PRONAME-$VERSION-stock.zip exist. ${txtrst}"
+    rm -rf $PRONAME/$PRONAME-$VERSION-stock.zip
+    echo "${grn} Deleted. ${txtrst}"
+else
+    echo "${bldblu} $PRONAME-$VERSION-stock.zip${txtrst}${blu} not exist. ${txtrst}"
 fi
 
 if [ -e "$PRONAME/ZIP_FILES/boot/bootimg/zImage" ]
@@ -418,7 +431,7 @@ then
     echo "${grn} Done. ${txtrst}"
     echo ""
 
-    # Second compile.
+    # Compile.
     echo "${bldblu} Compiling... ${txtrst}"
     make -j "$JOBS"
     echo "${grn} Done. ${txtrst}"
@@ -443,7 +456,6 @@ then
         echo ""
         echo ""
 
-        # Copy from $PRONAME to ZIP_FILES.
         echo "${bldblu} Coping files for zip... ${txtrst}"
         cp $PRONAME/work/modules/* $PRONAME/ZIP_FILES/system/lib/modules/
         cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/boot/bootimg/
@@ -451,7 +463,6 @@ then
         echo ""
 
         echo "${bldblu} Zipping... ${txtrst}"
-        # Zip ZIP_FILES folder.
         cd $PRONAME/ZIP_FILES
         zip -r $PRONAME.zip *
         cd -
@@ -459,13 +470,11 @@ then
         echo ""
 
         echo "${bldblu} Moving... ${txtrst}"
-        # Move zip to main $PRONAME folder.
         mv $PRONAME/ZIP_FILES/$PRONAME.zip $PRONAME/
         echo "${grn} Done. ${txtrst}"
         echo ""
 
         echo "${bldblu} Renaming... ${txtrst}"
-        # Rename new zip.
         mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$VERSION-MALI_fix.zip
         echo "${grn} Done. ${txtrst}"
         echo ""
@@ -504,6 +513,124 @@ then
     echo ""
 else
     echo "${ylw} Clean skipped. ${txtrst}"
+    echo ""
+    echo ""
+fi
+
+#########################
+# Clean between version #   Copy that between other versions.
+#########################
+
+# Remove older files.
+rm -rf $PRONAME/ZIP_FILES/boot/bootimg/*
+rm -rf $PRONAME/ZIP_FILES/system/lib/modules/*
+rm -rf $PRONAME/work/boot/*
+rm -rf $PRONAME/work/modules/*
+
+###################
+## Stock version ##
+###################
+
+if [ $STOCK = 1 ]
+then
+
+    echo "${txtbld} Starting stock build... ${txtrst}"
+    echo ""
+    echo ""
+    echo ""
+
+    # Load config.
+    echo "${bldblu} Loading config... ${txtrst}"
+    make $CONFIGSTOCK
+    echo "${grn} Done. ${txtrst}"
+    echo ""
+
+    # Compile.
+    echo "${bldblu} Compiling... ${txtrst}"
+    make -j "$JOBS"
+    echo "${grn} Done. ${txtrst}"
+    echo ""
+
+    # Move compiled files to $PRONAME folder.
+    echo "${bldblu} Coping modules... ${txtrst}"
+    find -name '*.ko' -exec cp -av {} $PRONAME/work/modules/ \;
+    echo "${grn} Done. ${txtrst}"
+    echo ""
+
+    echo "${bldblu} Coping zImage... ${txtrst}"
+    cp arch/arm/boot/zImage $PRONAME/work/boot/
+    echo "${grn} Done. ${txtrst}"
+    echo ""
+    echo ""
+    echo ""
+
+    if [ $NORMALZIP = 1 ]
+    then
+
+        echo "${txtbld} Starting stock build compress... ${txtrst}"
+        echo ""
+        echo ""
+        echo ""
+
+        echo "${bldblu} Coping files for zip... ${txtrst}"
+        cp $PRONAME/work/modules/ $PRONAME/ZIP_FILES/system/lib/modules/
+        cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/boot/bootimg/
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+
+        echo "${bldblu} Zipping... ${txtrst}"
+        cd $PRONAME/ZIP_FILES
+        zip -r $PRONAME.zip *
+        cd -
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+
+        echo "${bldblu} Moving... ${txtrst}"
+        mv $PRONAME/ZIP_FILES/$PRONAME.zip $PRONAME/
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+
+        echo "${bldblu} Renaming... ${txtrst}"
+        mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$VERSION-stock.zip
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+        echo ""
+        echo ""
+    fi
+
+    if [ $STOCKZIP = 0 ]
+    then
+        echo "${txtbld} Done stock build compile. ${txtrst}"
+    else
+        echo "${txtbld} Done stock build compile with compress. ${txtrst}"
+    fi
+    echo ""
+    echo ""
+    echo ""
+else
+    echo "${ylw} Skipped stock build. ${txtrst}"
+    echo ""
+    echo ""
+    echo ""
+fi
+
+##################
+## Fourth clean ##
+##################
+
+# Cleaning.
+if [ $FOUCLEAN = 1 ]
+then
+    echo "${bldblu} Cleaning... ${txtrst}"
+    make -j "$JOBS" clean
+    make -j "$JOBS" mrproper
+    echo "${grn} Cleaned. ${txtrst}"
+    echo ""
+    echo ""
+    echo ""
+else
+    echo "${ylw} Clean skipped. ${txtrst}"
+    echo ""
     echo ""
     echo ""
 fi
