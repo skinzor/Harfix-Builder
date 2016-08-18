@@ -25,13 +25,13 @@
 CLEAN=0				# Clean before compile.     #
 NORMAL=0			# Compile normal version.   #
     NORMALZIP=1                     # Zip normal version.   #
-SECCLEAN=0			# Clean before next version.#
+SECCLEAN=0			# Clean between versions.   #
 MALIFIX=0			# Compile MALI_fix version. #
     MALIFIXZIP=1                    # Zip MALI_fix version. #
-THICLEAN=0			# Clean after last version. #
-STOCK=1
-	STOCKZIP=1
-FOUCLEAN=0
+THICLEAN=0			# Clean between versions.   #
+STOCK=1                         # Compile stock version.    #
+        STOCKZIP=1                  # Zip stock version.    #
+FOUCLEAN=0                      # Latest clean.             #
 PRONAME="Harfix3"               # Name for folders, files.  #
 VERSION="1.1"                   # Version number or name.   #
 # If compile is disabled, zip is disabled too.              #
@@ -55,7 +55,7 @@ TCEND="bin/arm-linux-gnueabihf-"    # Toolchain end of name         #
 #                                                                                    #
 CONFIGNORMAL=custom_i9300_defconfig             # Standard config                    #
 CONFIGMALIFIX=custom_mali_fix_i9300_defconfig   # Standard config with broken fences #
-CONFIGSTOCK=custom_stock_i9300_defconfig		# Standard config for stock ROMs	 #
+CONFIGSTOCK=custom_stock_i9300_defconfig	# Standard config for stock ROMs     #
 #                                                                                    #
 ######################################################################################
 #                                                                                    #
@@ -304,19 +304,17 @@ then
     echo ""
     echo ""
 
-    # Load config.
     echo "${bldblu} Loading config... ${txtrst}"
     make $CONFIGNORMAL
     echo "${grn} Done. ${txtrst}"
     echo ""
 
-    # Compile.
     echo "${bldblu} Compiling... ${txtrst}"
     make -j "$JOBS"
     echo "${grn} Done. ${txtrst}"
     echo ""
 
-    # Move compiled files to $PRONAME folder.
+    # Move compiled files to work folder.
     echo "${bldblu} Coping modules... ${txtrst}"
     find -name '*.ko' -exec cp -av {} $PRONAME/work/modules/ \;
     echo "${grn} Done. ${txtrst}"
@@ -337,7 +335,6 @@ then
         echo ""
         echo ""
 
-        # Copy from $PRONAME to ZIP_FILES.
         echo "${bldblu} Coping files for zip... ${txtrst}"
         cp $PRONAME/work/modules/ $PRONAME/ZIP_FILES/system/lib/modules/
         cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/boot/bootimg/
@@ -345,7 +342,6 @@ then
         echo ""
 
         echo "${bldblu} Zipping... ${txtrst}"
-        # zip ZIP_FILES folder.
         cd $PRONAME/ZIP_FILES
         zip -r $PRONAME.zip *
         cd -
@@ -353,13 +349,11 @@ then
         echo ""
 
         echo "${bldblu} Moving... ${txtrst}"
-        # Move zip to main $PRONAME folder.
         mv $PRONAME/ZIP_FILES/$PRONAME.zip $PRONAME/
         echo "${grn} Done. ${txtrst}"
         echo ""
 
         echo "${bldblu} Renaming... ${txtrst}"
-        # Rename new zip.
         mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$VERSION.zip
         echo "${grn} Done. ${txtrst}"
         echo ""
@@ -425,19 +419,17 @@ then
     echo ""
     echo ""
 
-    # Load config.
     echo "${bldblu} Loading config... ${txtrst}"
     make $CONFIGMALIFIX
     echo "${grn} Done. ${txtrst}"
     echo ""
 
-    # Compile.
     echo "${bldblu} Compiling... ${txtrst}"
     make -j "$JOBS"
     echo "${grn} Done. ${txtrst}"
     echo ""
 
-    # Move compiled files to $PRONAME folder.
+    # Move compiled files to work folder.
     echo "${bldblu} Coping modules... ${txtrst}"
     find -name '*.ko' -exec cp -av {} $PRONAME/work/modules/ \;
     echo "${grn} Done. ${txtrst}"
@@ -539,19 +531,17 @@ then
     echo ""
     echo ""
 
-    # Load config.
     echo "${bldblu} Loading config... ${txtrst}"
     make $CONFIGSTOCK
     echo "${grn} Done. ${txtrst}"
     echo ""
 
-    # Compile.
     echo "${bldblu} Compiling... ${txtrst}"
     make -j "$JOBS"
     echo "${grn} Done. ${txtrst}"
     echo ""
 
-    # Move compiled files to $PRONAME folder.
+    # Move compiled files to work folder.
     echo "${bldblu} Coping modules... ${txtrst}"
     find -name '*.ko' -exec cp -av {} $PRONAME/work/modules/ \;
     echo "${grn} Done. ${txtrst}"
