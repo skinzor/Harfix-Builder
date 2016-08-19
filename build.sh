@@ -2,7 +2,7 @@
 
 #############################################
 ##                                         ##
-###$           Kernel builder            ####
+####           Kernel builder            ####
 ##                                         ##
 #############################################
 ##                  2016                   ##
@@ -18,8 +18,8 @@
 #                                           #
 ##      REMEMBER TO EDIT LOCATIONS!!!      ##
 #############################################
-#                                           ##
-#                                             #
+#                                            #
+# If colours looks ugly, use black terminal   #
 #                                              #
 ########################  OPTIONS  ##########################
 ##                 (1-enabled, 0-disabled)                 ##
@@ -82,7 +82,6 @@ txtbld=$(tput bold)             # Bold    # Info
 bldred=${txtbld}$(tput setaf 1) # Red     # Error desc
 bldblu=${txtbld}$(tput setaf 4) # blue    # Info
 txtrst=$(tput sgr0)             # Reset
-# I using black terminal so that can look ugly on white.
 
 echo -e '\0033\0143'
 echo ""
@@ -265,14 +264,14 @@ echo ""
 echo ""
 
 
-# Prepering. Edit at beginning of script, not here.
+# Edit at beginning of script, not here.
 export ARCH=$ARCH
 export CROSS_COMPILE=$TCDIR/$TCNAME/$TCEND
 
 # Testing Toolchain
 if [ -e $TCDIR/$TCNAME/$TCENDgcc ]
 then
-    echo "${txtbld} Toolchain set correctly. ${txtrst}"
+    echo "${grn} Toolchain set correctly. ${txtrst}"
     echo ""
     echo ""
     echo ""
