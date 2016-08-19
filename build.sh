@@ -16,12 +16,14 @@
 # in Harfix3 kernel for i9300.              #
 # by me of course :)                        #
 #                                           #
-## REMEMBER TO EDIT LOCATIONS!!!           ##
+##      REMEMBER TO EDIT LOCATIONS!!!      ##
 #############################################
-#                                            #
+#                                           ##
 #                                             #
+#                                              #
 ########################  OPTIONS  ##########################
-# Possible options to run: 	(1-enabled, 0-disabled)     #
+##                 (1-enabled, 0-disabled)                 ##
+#                                                           #
 CLEAN=0				# Clean before compile.     #
 NORMAL=0			# Compile normal version.   #
     NORMALZIP=1                     # Zip normal version.   #
@@ -29,12 +31,16 @@ SECCLEAN=0			# Clean between versions.   #
 MALIFIX=0			# Compile MALI_fix version. #
     MALIFIXZIP=1                    # Zip MALI_fix version. #
 THICLEAN=0			# Clean between versions.   #
-STOCK=1                         # Compile stock version.    #
-        STOCKZIP=1                  # Zip stock version.    #
-FOUCLEAN=0                      # Latest clean.             #
-PRONAME="Harfix3"               # Name for folders, files.  #
+STOCK43=0                       # Compile stock version.    #
+    STOCK43ZIP=1                    # Zip stock version.    #
+FOUCLEAN=0                      # Clean between versions.   #
+STOCK44=1                       # Compile stock version.    #
+    STOCK44ZIP=1                    # Zip stock version.    #
+FIFCLEAN=0                      # Latest clean.             #
+PRONAME="Harfix3"               # Project name.             #
 VERSION="1.1"                   # Version number or name.   #
-# If compile is disabled, zip is disabled too.              #
+#                                                           #
+##       If compile is disabled, zip is disabled too.      ##
 #############################################################
 #                                                           #
 # Auto detect Your home folder.                              #
@@ -51,11 +57,12 @@ TCEND="bin/arm-linux-gnueabihf-"    # Toolchain end of name         #
 #                     ##  TC example:  ##                             #
 # $TCDIR/$TCNAME/$TCEND                                                #
 #                                                                       #
-########################################  Configs  ###################################
+####################################  Configs  #######################################
 #                                                                                    #
 CONFIGNORMAL=custom_i9300_defconfig             # Standard config                    #
 CONFIGMALIFIX=custom_mali_fix_i9300_defconfig   # Standard config with broken fences #
-CONFIGSTOCK=custom_stock_i9300_defconfig	# Standard config for stock ROMs     #
+CONFIGSTOCK43=custom_stock43_i9300_defconfig	# Standard config for stock ROMs     #
+CONFIGSTOCK44=custom_stock44_i9300_defconfig	# Standard config for stock ROMs     #
 #                                                                                    #
 ######################################################################################
 #                                                                                    #
@@ -215,13 +222,22 @@ else
     echo "${bldblu} $PRONAME-$VERSION-MALI_fix.zip${txtrst}${blu} not exist. ${txtrst}"
 fi
 
-if [ -e "$PRONAME/$PRONAME-$VERSION-stock.zip" ]
+if [ -e "$PRONAME/$PRONAME-$VERSION-stock43.zip" ]
 then
-    echo "${ylw} $PRONAME-$VERSION-stock.zip exist. ${txtrst}"
-    rm -rf $PRONAME/$PRONAME-$VERSION-stock.zip
+    echo "${ylw} $PRONAME-$VERSION-stock43.zip exist. ${txtrst}"
+    rm -rf $PRONAME/$PRONAME-$VERSION-stock43.zip
     echo "${grn} Deleted. ${txtrst}"
 else
-    echo "${bldblu} $PRONAME-$VERSION-stock.zip${txtrst}${blu} not exist. ${txtrst}"
+    echo "${bldblu} $PRONAME-$VERSION-stock43.zip${txtrst}${blu} not exist. ${txtrst}"
+fi
+
+if [ -e "$PRONAME/$PRONAME-$VERSION-stock44.zip" ]
+then
+    echo "${ylw} $PRONAME-$VERSION-stock44.zip exist. ${txtrst}"
+    rm -rf $PRONAME/$PRONAME-$VERSION-stock44.zip
+    echo "${grn} Deleted. ${txtrst}"
+else
+    echo "${bldblu} $PRONAME-$VERSION-stock44.zip${txtrst}${blu} not exist. ${txtrst}"
 fi
 
 if [ -e "$PRONAME/ZIP_FILES/boot/bootimg/zImage" ]
@@ -284,11 +300,6 @@ then
     echo ""
     echo ""
     echo ""
-else
-    echo "${ylw} Clean skipped. ${txtrst}"
-    echo ""
-    echo ""
-    echo ""
 fi
 
 
@@ -299,7 +310,7 @@ fi
 if [ $NORMAL = 1 ]
 then
 
-    echo "${txtbld} Starting Normal build... ${txtrst}"
+    echo "${txtbld} Starting Normal compile... ${txtrst}"
     echo ""
     echo ""
     echo ""
@@ -330,13 +341,13 @@ then
     if [ $NORMALZIP = 1 ]
     then
 
-        echo "${txtbld} Starting Normal build compress... ${txtrst}"
+        echo "${txtbld} Starting Normal compress... ${txtrst}"
         echo ""
         echo ""
         echo ""
 
         echo "${bldblu} Coping files for zip... ${txtrst}"
-        cp $PRONAME/work/modules/ $PRONAME/ZIP_FILES/system/lib/modules/
+        cp $PRONAME/work/modules/* $PRONAME/ZIP_FILES/system/lib/modules/
         cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/boot/bootimg/
         echo "${grn} Done. ${txtrst}"
         echo ""
@@ -359,13 +370,9 @@ then
         echo ""
         echo ""
         echo ""
-    fi
-
-    if [ $NORMALZIP = 0 ]
-    then
-        echo "${txtbld} Done Normal build compile. ${txtrst}"
+        echo "${txtbld} Done normal build compile with compress. ${txtrst}"
     else
-        echo "${txtbld} Done Normal build compile with compress. ${txtrst}"
+        echo "${txtbld} Done normal build compile. ${txtrst}"
     fi
     echo ""
     echo ""
@@ -391,11 +398,6 @@ then
     echo ""
     echo ""
     echo ""
-else
-    echo "${ylw} Clean skipped. ${txtrst}"
-    echo ""
-    echo ""
-    echo ""
 fi
 
 #########################
@@ -414,7 +416,7 @@ rm -rf $PRONAME/work/modules/*
 
 if [ $MALIFIX = 1 ]
 then
-    echo "${txtbld} Starting MALI_FIX build... ${txtrst}"
+    echo "${txtbld} Starting MALI_FIX compile... ${txtrst}"
     echo ""
     echo ""
     echo ""
@@ -443,7 +445,7 @@ then
     if [ $MALIFIXZIP = 1 ]
     then
 
-        echo "${txtbld} Starting MALI_fix build compress... ${txtrst}"
+        echo "${txtbld} Starting MALI_fix compress... ${txtrst}"
         echo ""
         echo ""
         echo ""
@@ -472,13 +474,9 @@ then
         echo ""
         echo ""
         echo ""
-    fi
-
-    if [ $MALIFIXZIP = 0 ]
-    then
-        echo "${txtbld} Done MALI_fix build compile. ${txtrst}"
+        echo "${txtbld} Done MALI_FIX build compile with compress. ${txtrst}"
     else
-        echo "${txtbld} Done MALI_fix build compile with compress. ${txtrst}"
+        echo "${txtbld} Done MALI_FIX build compile. ${txtrst}"
     fi
     echo ""
     echo ""
@@ -503,10 +501,6 @@ then
     echo "${grn} Cleaned. ${txtrst}"
     echo ""
     echo ""
-else
-    echo "${ylw} Clean skipped. ${txtrst}"
-    echo ""
-    echo ""
 fi
 
 #########################
@@ -519,20 +513,20 @@ rm -rf $PRONAME/ZIP_FILES/system/lib/modules/*
 rm -rf $PRONAME/work/boot/*
 rm -rf $PRONAME/work/modules/*
 
-###################
-## Stock version ##
-###################
+#####################
+## Stock43 version ##
+#####################
 
-if [ $STOCK = 1 ]
+if [ $STOCK43 = 1 ]
 then
 
-    echo "${txtbld} Starting stock build... ${txtrst}"
+    echo "${txtbld} Starting stock43 compile... ${txtrst}"
     echo ""
     echo ""
     echo ""
 
     echo "${bldblu} Loading config... ${txtrst}"
-    make $CONFIGSTOCK
+    make $CONFIGSTOCK43
     echo "${grn} Done. ${txtrst}"
     echo ""
 
@@ -554,16 +548,16 @@ then
     echo ""
     echo ""
 
-    if [ $NORMALZIP = 1 ]
+    if [ $STOCK43ZIP = 1 ]
     then
 
-        echo "${txtbld} Starting stock build compress... ${txtrst}"
+        echo "${txtbld} Starting stock43 compress... ${txtrst}"
         echo ""
         echo ""
         echo ""
 
         echo "${bldblu} Coping files for zip... ${txtrst}"
-        cp $PRONAME/work/modules/ $PRONAME/ZIP_FILES/system/lib/modules/
+        cp $PRONAME/work/modules/* $PRONAME/ZIP_FILES/system/lib/modules/
         cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/boot/bootimg/
         echo "${grn} Done. ${txtrst}"
         echo ""
@@ -581,18 +575,14 @@ then
         echo ""
 
         echo "${bldblu} Renaming... ${txtrst}"
-        mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$VERSION-stock.zip
+        mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$VERSION-stock43.zip
         echo "${grn} Done. ${txtrst}"
         echo ""
         echo ""
         echo ""
-    fi
-
-    if [ $STOCKZIP = 0 ]
-    then
-        echo "${txtbld} Done stock build compile. ${txtrst}"
+        echo "${txtbld} Done stock43 build compile with compress. ${txtrst}"
     else
-        echo "${txtbld} Done stock build compile with compress. ${txtrst}"
+        echo "${txtbld} Done stock43 build compile. ${txtrst}"
     fi
     echo ""
     echo ""
@@ -618,8 +608,110 @@ then
     echo ""
     echo ""
     echo ""
+fi
+
+#########################
+# Clean between version #   Copy that between other versions.
+#########################
+
+# Remove older files.
+rm -rf $PRONAME/ZIP_FILES/boot/bootimg/*
+rm -rf $PRONAME/ZIP_FILES/system/lib/modules/*
+rm -rf $PRONAME/work/boot/*
+rm -rf $PRONAME/work/modules/*
+
+#####################
+## Stock44 version ##
+#####################
+
+if [ $STOCK44 = 1 ]
+then
+
+    echo "${txtbld} Starting stock44 compile... ${txtrst}"
+    echo ""
+    echo ""
+    echo ""
+
+    echo "${bldblu} Loading config... ${txtrst}"
+    make $CONFIGSTOCK44
+    echo "${grn} Done. ${txtrst}"
+    echo ""
+
+    echo "${bldblu} Compiling... ${txtrst}"
+    make -j "$JOBS"
+    echo "${grn} Done. ${txtrst}"
+    echo ""
+
+    # Move compiled files to work folder.
+    echo "${bldblu} Coping modules... ${txtrst}"
+    find -name '*.ko' -exec cp -av {} $PRONAME/work/modules/ \;
+    echo "${grn} Done. ${txtrst}"
+    echo ""
+
+    echo "${bldblu} Coping zImage... ${txtrst}"
+    cp arch/arm/boot/zImage $PRONAME/work/boot/
+    echo "${grn} Done. ${txtrst}"
+    echo ""
+    echo ""
+    echo ""
+
+    if [ $STOCK44ZIP = 1 ]
+    then
+
+        echo "${txtbld} Starting stock44 compress... ${txtrst}"
+        echo ""
+        echo ""
+        echo ""
+
+        echo "${bldblu} Coping files for zip... ${txtrst}"
+        cp $PRONAME/work/modules/* $PRONAME/ZIP_FILES/system/lib/modules/
+        cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/boot/bootimg/
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+
+        echo "${bldblu} Zipping... ${txtrst}"
+        cd $PRONAME/ZIP_FILES
+        zip -r $PRONAME.zip *
+        cd -
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+
+        echo "${bldblu} Moving... ${txtrst}"
+        mv $PRONAME/ZIP_FILES/$PRONAME.zip $PRONAME/
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+
+        echo "${bldblu} Renaming... ${txtrst}"
+        mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$VERSION-stock44.zip
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+        echo ""
+        echo ""
+        echo "${txtbld} Done stock44 build compile with compress. ${txtrst}"
+    else
+        echo "${txtbld} Done stock44 build compile. ${txtrst}"
+    fi
+    echo ""
+    echo ""
+    echo ""
 else
-    echo "${ylw} Clean skipped. ${txtrst}"
+    echo "${ylw} Skipped stock build. ${txtrst}"
+    echo ""
+    echo ""
+    echo ""
+fi
+
+#################
+## Fifth clean ##
+#################
+
+# Cleaning.
+if [ $FIFCLEAN = 1 ]
+then
+    echo "${bldblu} Cleaning... ${txtrst}"
+    make -j "$JOBS" clean
+    make -j "$JOBS" mrproper
+    echo "${grn} Cleaned. ${txtrst}"
     echo ""
     echo ""
     echo ""
@@ -635,7 +727,13 @@ rm -rf $PRONAME/ZIP_FILES/system/lib/modules/*
 rm -rf $PRONAME/work/boot/*
 rm -rf $PRONAME/work/modules/*
 
-echo ""
+################
+# Latest clean #
+################
+
+rm -rf $PRONAME/work
+
+
 echo "${gren} Kernel builder completed all tasks! ${txtrst}"
 echo ""
 exit 0
