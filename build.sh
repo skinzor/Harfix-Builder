@@ -34,9 +34,12 @@ THICLEAN=0			# Clean between versions.   #
 STOCK43=0                       # Compile stock version.    #
     STOCK43ZIP=1                    # Zip stock version.    #
 FOUCLEAN=0                      # Clean between versions.   #
-STOCK44=1                       # Compile stock version.    #
+STOCK44=0                       # Compile stock version.    #
     STOCK44ZIP=1                    # Zip stock version.    #
-FIFCLEAN=0                      # Latest clean.             #
+FIFCLEAN=0                      # Clean between versions.   #
+STOCK51=1                       # Compile stock version.    #
+    STOCK51ZIP=1                    # Zip stock version.    #
+SIXCLEAN=0                      # Latest clean.             #
 PRONAME="Harfix3"               # Project name.             #
 VERSION="1.1"                   # Version number or name.   #
 #                                                           #
@@ -63,6 +66,7 @@ CONFIGNORMAL=custom_i9300_defconfig             # Standard config               
 CONFIGMALIFIX=custom_mali_fix_i9300_defconfig   # Standard config with broken fences #
 CONFIGSTOCK43=custom_stock43_i9300_defconfig	# Standard config for stock ROMs     #
 CONFIGSTOCK44=custom_stock44_i9300_defconfig	# Standard config for stock ROMs     #
+CONFIGSTOCK51=custom_stock51_i9300_defconfig	# Standard config for stock ROMs     #
 #                                                                                    #
 ######################################################################################
 #                                                                                    #
@@ -238,6 +242,16 @@ then
 else
     echo "${bldblu} $PRONAME-$VERSION-stock44.zip${txtrst}${blu} not exist. ${txtrst}"
 fi
+
+if [ -e "$PRONAME/$PRONAME-$VERSION-stock51.zip" ]
+then
+    echo "${ylw} $PRONAME-$VERSION-stock51.zip exist. ${txtrst}"
+    rm -rf $PRONAME/$PRONAME-$VERSION-stock51.zip
+    echo "${grn} Deleted. ${txtrst}"
+else
+    echo "${bldblu} $PRONAME-$VERSION-stock51.zip${txtrst}${blu} not exist. ${txtrst}"
+fi
+
 
 if [ -e "$PRONAME/ZIP_FILES/boot/bootimg/zImage" ]
 then
@@ -587,7 +601,7 @@ then
     echo ""
     echo ""
 else
-    echo "${ylw} Skipped stock build. ${txtrst}"
+    echo "${ylw} Skipped stock43 build. ${txtrst}"
     echo ""
     echo ""
     echo ""
@@ -694,7 +708,7 @@ then
     echo ""
     echo ""
 else
-    echo "${ylw} Skipped stock build. ${txtrst}"
+    echo "${ylw} Skipped stock44 build. ${txtrst}"
     echo ""
     echo ""
     echo ""
@@ -706,6 +720,113 @@ fi
 
 # Cleaning.
 if [ $FIFCLEAN = 1 ]
+then
+    echo "${bldblu} Cleaning... ${txtrst}"
+    make -j "$JOBS" clean
+    make -j "$JOBS" mrproper
+    echo "${grn} Cleaned. ${txtrst}"
+    echo ""
+    echo ""
+    echo ""
+fi
+
+#########################
+# Clean between version #   Copy that between other versions.
+#########################
+
+# Remove older files.
+rm -rf $PRONAME/ZIP_FILES/boot/bootimg/*
+rm -rf $PRONAME/ZIP_FILES/system/lib/modules/*
+rm -rf $PRONAME/work/boot/*
+rm -rf $PRONAME/work/modules/*
+
+#####################
+## Stock51 version ##
+#####################
+
+if [ $STOCK451 = 1 ]
+then
+
+    echo "${txtbld} Starting stock51 compile... ${txtrst}"
+    echo ""
+    echo ""
+    echo ""
+
+    echo "${bldblu} Loading config... ${txtrst}"
+    make $CONFIGSTOCK51
+    echo "${grn} Done. ${txtrst}"
+    echo ""
+
+    echo "${bldblu} Compiling... ${txtrst}"
+    make -j "$JOBS"
+    echo "${grn} Done. ${txtrst}"
+    echo ""
+
+    # Move compiled files to work folder.
+    echo "${bldblu} Coping modules... ${txtrst}"
+    find -name '*.ko' -exec cp -av {} $PRONAME/work/modules/ \;
+    echo "${grn} Done. ${txtrst}"
+    echo ""
+
+    echo "${bldblu} Coping zImage... ${txtrst}"
+    cp arch/arm/boot/zImage $PRONAME/work/boot/
+    echo "${grn} Done. ${txtrst}"
+    echo ""
+    echo ""
+    echo ""
+
+    if [ $STOCK51ZIP = 1 ]
+    then
+
+        echo "${txtbld} Starting stock51 compress... ${txtrst}"
+        echo ""
+        echo ""
+        echo ""
+
+        echo "${bldblu} Coping files for zip... ${txtrst}"
+        cp $PRONAME/work/modules/* $PRONAME/ZIP_FILES/system/lib/modules/
+        cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/boot/bootimg/
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+
+        echo "${bldblu} Zipping... ${txtrst}"
+        cd $PRONAME/ZIP_FILES
+        zip -r $PRONAME.zip *
+        cd -
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+
+        echo "${bldblu} Moving... ${txtrst}"
+        mv $PRONAME/ZIP_FILES/$PRONAME.zip $PRONAME/
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+
+        echo "${bldblu} Renaming... ${txtrst}"
+        mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$VERSION-stock51.zip
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+        echo ""
+        echo ""
+        echo "${txtbld} Done stock51 build compile with compress. ${txtrst}"
+    else
+        echo "${txtbld} Done stock51 build compile. ${txtrst}"
+    fi
+    echo ""
+    echo ""
+    echo ""
+else
+    echo "${ylw} Skipped stock51 build. ${txtrst}"
+    echo ""
+    echo ""
+    echo ""
+fi
+
+#################
+## Sixth clean ##
+#################
+
+# Cleaning.
+if [ $SIXCLEAN = 1 ]
 then
     echo "${bldblu} Cleaning... ${txtrst}"
     make -j "$JOBS" clean
