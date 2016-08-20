@@ -252,7 +252,6 @@ else
     echo "${bldblu} $PRONAME-$VERSION-stock51.zip${txtrst}${blu} not exist. ${txtrst}"
 fi
 
-
 if [ -e "$PRONAME/ZIP_FILES/boot/bootimg/zImage" ]
 then
     echo "${ylw} $PRONAME/ZIP_FILES/boot/bootimg/zImage exist. ${txtrst}"
@@ -269,6 +268,15 @@ then
     echo "${grn} Deleted all modules. ${txtrst}"
 else
     echo "${bldblu} $PRONAME/ZIP_FILES/system/lib/modules/*${txtrst}${blu} not exist. ${txtrst}"
+fi
+
+if [ -e "arch/arm/boot/zImage" ]
+then
+    echo "${ylw} arch/arm/boot/zImage exist. ${txtrst}"
+    rm -rf arch/arm/boot/zImage
+    echo "${grn} Deleted old zImage. ${txtrst}"
+else
+    echo "${bldblu} arch/arm/boot/zImage${txtrst}${blu} not exist. ${txtrst}"
 fi
 
 echo ""
@@ -351,41 +359,58 @@ then
     echo ""
     echo ""
 
-    if [ $NORMALZIP = 1 ]
+    if [ -e "arch/arm/boot/zImage" ]
     then
-
-        echo "${txtbld} Starting Normal compress... ${txtrst}"
+        echo "${grn} zImage detected. ${txtrst}"
         echo ""
         echo ""
         echo ""
 
-        echo "${bldblu} Coping files for zip... ${txtrst}"
-        cp $PRONAME/work/modules/* $PRONAME/ZIP_FILES/system/lib/modules/
-        cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/boot/bootimg/
-        echo "${grn} Done. ${txtrst}"
-        echo ""
+        if [ $NORMALZIP = 1 ]
+        then
 
-        echo "${bldblu} Zipping... ${txtrst}"
-        cd $PRONAME/ZIP_FILES
-        zip -r $PRONAME.zip *
-        cd -
-        echo "${grn} Done. ${txtrst}"
-        echo ""
+            echo "${txtbld} Starting Normal compress... ${txtrst}"
+            echo ""
+            echo ""
+            echo ""
 
-        echo "${bldblu} Moving... ${txtrst}"
-        mv $PRONAME/ZIP_FILES/$PRONAME.zip $PRONAME/
-        echo "${grn} Done. ${txtrst}"
-        echo ""
+            echo "${bldblu} Coping files for zip... ${txtrst}"
+            cp $PRONAME/work/modules/* $PRONAME/ZIP_FILES/system/lib/modules/
+            cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/boot/bootimg/
+            echo "${grn} Done. ${txtrst}"
+            echo ""
 
-        echo "${bldblu} Renaming... ${txtrst}"
-        mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$VERSION.zip
-        echo "${grn} Done. ${txtrst}"
-        echo ""
-        echo ""
-        echo ""
-        echo "${txtbld} Done normal build compile with compress. ${txtrst}"
+            echo "${bldblu} Zipping... ${txtrst}"
+            cd $PRONAME/ZIP_FILES
+            zip -r $PRONAME.zip *
+            cd -
+            echo "${grn} Done. ${txtrst}"
+            echo ""
+
+            echo "${bldblu} Moving... ${txtrst}"
+            mv $PRONAME/ZIP_FILES/$PRONAME.zip $PRONAME/
+            echo "${grn} Done. ${txtrst}"
+            echo ""
+
+            echo "${bldblu} Renaming... ${txtrst}"
+            mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$VERSION.zip
+            echo "${grn} Done. ${txtrst}"
+            echo ""
+            echo ""
+            echo ""
+            echo "${txtbld} Done normal build compile with compress. ${txtrst}"
+        else
+            echo "${txtbld} Done normal build compile. ${txtrst}"
+        fi
     else
-        echo "${txtbld} Done normal build compile. ${txtrst}"
+        echo "${red} ERROR! ${txtrst}"
+        echo "${bldred} zImage NOT detected. ${txtrst}"
+        echo ""
+        echo ""
+        echo ""
+        echo "${gren} Kernel builder completed all tasks! ${txtrst}"
+        echo ""
+        exit 1
     fi
     echo ""
     echo ""
@@ -418,6 +443,7 @@ fi
 #########################
 
 # Remove older files.
+rm -rf arch/arm/boot/zImage
 rm -rf $PRONAME/ZIP_FILES/boot/bootimg/*
 rm -rf $PRONAME/ZIP_FILES/system/lib/modules/*
 rm -rf $PRONAME/work/boot/*
@@ -455,41 +481,58 @@ then
     echo "${grn} Done. ${txtrst}"
     echo ""
 
-    if [ $MALIFIXZIP = 1 ]
+    if [ -e "arch/arm/boot/zImage" ]
     then
-
-        echo "${txtbld} Starting MALI_fix compress... ${txtrst}"
+        echo "${grn} zImage detected. ${txtrst}"
         echo ""
         echo ""
         echo ""
 
-        echo "${bldblu} Coping files for zip... ${txtrst}"
-        cp $PRONAME/work/modules/* $PRONAME/ZIP_FILES/system/lib/modules/
-        cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/boot/bootimg/
-        echo "${grn} Done. ${txtrst}"
-        echo ""
+        if [ $MALIFIXZIP = 1 ]
+        then
 
-        echo "${bldblu} Zipping... ${txtrst}"
-        cd $PRONAME/ZIP_FILES
-        zip -r $PRONAME.zip *
-        cd -
-        echo "${grn} Done. ${txtrst}"
-        echo ""
+            echo "${txtbld} Starting MALI_fix compress... ${txtrst}"
+            echo ""
+            echo ""
+            echo ""
 
-        echo "${bldblu} Moving... ${txtrst}"
-        mv $PRONAME/ZIP_FILES/$PRONAME.zip $PRONAME/
-        echo "${grn} Done. ${txtrst}"
-        echo ""
+            echo "${bldblu} Coping files for zip... ${txtrst}"
+            cp $PRONAME/work/modules/* $PRONAME/ZIP_FILES/system/lib/modules/
+            cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/boot/bootimg/
+            echo "${grn} Done. ${txtrst}"
+            echo ""
 
-        echo "${bldblu} Renaming... ${txtrst}"
-        mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$VERSION-MALI_fix.zip
-        echo "${grn} Done. ${txtrst}"
-        echo ""
-        echo ""
-        echo ""
-        echo "${txtbld} Done MALI_FIX build compile with compress. ${txtrst}"
+            echo "${bldblu} Zipping... ${txtrst}"
+            cd $PRONAME/ZIP_FILES
+            zip -r $PRONAME.zip *
+            cd -
+            echo "${grn} Done. ${txtrst}"
+            echo ""
+
+            echo "${bldblu} Moving... ${txtrst}"
+            mv $PRONAME/ZIP_FILES/$PRONAME.zip $PRONAME/
+            echo "${grn} Done. ${txtrst}"
+            echo ""
+
+            echo "${bldblu} Renaming... ${txtrst}"
+            mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$VERSION-MALI_fix.zip
+            echo "${grn} Done. ${txtrst}"
+            echo ""
+            echo ""
+            echo ""
+            echo "${txtbld} Done MALI_FIX build compile with compress. ${txtrst}"
+        else
+            echo "${txtbld} Done MALI_FIX build compile. ${txtrst}"
+        fi
     else
-        echo "${txtbld} Done MALI_FIX build compile. ${txtrst}"
+        echo "${red} ERROR! ${txtrst}"
+        echo "${bldred} zImage NOT detected. ${txtrst}"
+        echo ""
+        echo ""
+        echo ""
+        echo "${gren} Kernel builder completed all tasks! ${txtrst}"
+        echo ""
+        exit 1
     fi
     echo ""
     echo ""
@@ -521,6 +564,7 @@ fi
 #########################
 
 # Remove older files.
+rm -rf arch/arm/boot/zImage
 rm -rf $PRONAME/ZIP_FILES/boot/bootimg/*
 rm -rf $PRONAME/ZIP_FILES/system/lib/modules/*
 rm -rf $PRONAME/work/boot/*
@@ -561,41 +605,58 @@ then
     echo ""
     echo ""
 
-    if [ $STOCK43ZIP = 1 ]
+    if [ -e "arch/arm/boot/zImage" ]
     then
-
-        echo "${txtbld} Starting stock43 compress... ${txtrst}"
+        echo "${grn} zImage detected. ${txtrst}"
         echo ""
         echo ""
         echo ""
 
-        echo "${bldblu} Coping files for zip... ${txtrst}"
-        cp $PRONAME/work/modules/* $PRONAME/ZIP_FILES/system/lib/modules/
-        cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/boot/bootimg/
-        echo "${grn} Done. ${txtrst}"
-        echo ""
+        if [ $STOCK43ZIP = 1 ]
+        then
 
-        echo "${bldblu} Zipping... ${txtrst}"
-        cd $PRONAME/ZIP_FILES
-        zip -r $PRONAME.zip *
-        cd -
-        echo "${grn} Done. ${txtrst}"
-        echo ""
+            echo "${txtbld} Starting stock43 compress... ${txtrst}"
+            echo ""
+            echo ""
+            echo ""
 
-        echo "${bldblu} Moving... ${txtrst}"
-        mv $PRONAME/ZIP_FILES/$PRONAME.zip $PRONAME/
-        echo "${grn} Done. ${txtrst}"
-        echo ""
+            echo "${bldblu} Coping files for zip... ${txtrst}"
+            cp $PRONAME/work/modules/* $PRONAME/ZIP_FILES/system/lib/modules/
+            cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/boot/bootimg/
+            echo "${grn} Done. ${txtrst}"
+            echo ""
 
-        echo "${bldblu} Renaming... ${txtrst}"
-        mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$VERSION-stock43.zip
-        echo "${grn} Done. ${txtrst}"
-        echo ""
-        echo ""
-        echo ""
-        echo "${txtbld} Done stock43 build compile with compress. ${txtrst}"
+            echo "${bldblu} Zipping... ${txtrst}"
+            cd $PRONAME/ZIP_FILES
+            zip -r $PRONAME.zip *
+            cd -
+            echo "${grn} Done. ${txtrst}"
+            echo ""
+
+            echo "${bldblu} Moving... ${txtrst}"
+            mv $PRONAME/ZIP_FILES/$PRONAME.zip $PRONAME/
+            echo "${grn} Done. ${txtrst}"
+            echo ""
+
+            echo "${bldblu} Renaming... ${txtrst}"
+            mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$VERSION-stock43.zip
+            echo "${grn} Done. ${txtrst}"
+            echo ""
+            echo ""
+            echo ""
+            echo "${txtbld} Done stock43 build compile with compress. ${txtrst}"
+        else
+            echo "${txtbld} Done stock43 build compile. ${txtrst}"
+        fi
     else
-        echo "${txtbld} Done stock43 build compile. ${txtrst}"
+        echo "${red} ERROR! ${txtrst}"
+        echo "${bldred} zImage NOT detected. ${txtrst}"
+        echo ""
+        echo ""
+        echo ""
+        echo "${gren} Kernel builder completed all tasks! ${txtrst}"
+        echo ""
+        exit 1
     fi
     echo ""
     echo ""
@@ -628,6 +689,7 @@ fi
 #########################
 
 # Remove older files.
+rm -rf arch/arm/boot/zImage
 rm -rf $PRONAME/ZIP_FILES/boot/bootimg/*
 rm -rf $PRONAME/ZIP_FILES/system/lib/modules/*
 rm -rf $PRONAME/work/boot/*
@@ -668,41 +730,58 @@ then
     echo ""
     echo ""
 
-    if [ $STOCK44ZIP = 1 ]
+    if [ -e "arch/arm/boot/zImage" ]
     then
-
-        echo "${txtbld} Starting stock44 compress... ${txtrst}"
+        echo "${grn} zImage detected. ${txtrst}"
         echo ""
         echo ""
         echo ""
 
-        echo "${bldblu} Coping files for zip... ${txtrst}"
-        cp $PRONAME/work/modules/* $PRONAME/ZIP_FILES/system/lib/modules/
-        cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/boot/bootimg/
-        echo "${grn} Done. ${txtrst}"
-        echo ""
+        if [ $STOCK44ZIP = 1 ]
+        then
 
-        echo "${bldblu} Zipping... ${txtrst}"
-        cd $PRONAME/ZIP_FILES
-        zip -r $PRONAME.zip *
-        cd -
-        echo "${grn} Done. ${txtrst}"
-        echo ""
+            echo "${txtbld} Starting stock44 compress... ${txtrst}"
+            echo ""
+            echo ""
+            echo ""
 
-        echo "${bldblu} Moving... ${txtrst}"
-        mv $PRONAME/ZIP_FILES/$PRONAME.zip $PRONAME/
-        echo "${grn} Done. ${txtrst}"
-        echo ""
+            echo "${bldblu} Coping files for zip... ${txtrst}"
+            cp $PRONAME/work/modules/* $PRONAME/ZIP_FILES/system/lib/modules/
+            cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/boot/bootimg/
+            echo "${grn} Done. ${txtrst}"
+            echo ""
 
-        echo "${bldblu} Renaming... ${txtrst}"
-        mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$VERSION-stock44.zip
-        echo "${grn} Done. ${txtrst}"
-        echo ""
-        echo ""
-        echo ""
-        echo "${txtbld} Done stock44 build compile with compress. ${txtrst}"
+            echo "${bldblu} Zipping... ${txtrst}"
+            cd $PRONAME/ZIP_FILES
+            zip -r $PRONAME.zip *
+            cd -
+            echo "${grn} Done. ${txtrst}"
+            echo ""
+
+            echo "${bldblu} Moving... ${txtrst}"
+            mv $PRONAME/ZIP_FILES/$PRONAME.zip $PRONAME/
+            echo "${grn} Done. ${txtrst}"
+            echo ""
+
+            echo "${bldblu} Renaming... ${txtrst}"
+            mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$VERSION-stock44.zip
+            echo "${grn} Done. ${txtrst}"
+            echo ""
+            echo ""
+            echo ""
+            echo "${txtbld} Done stock44 build compile with compress. ${txtrst}"
+        else
+            echo "${txtbld} Done stock44 build compile. ${txtrst}"
+        fi
     else
-        echo "${txtbld} Done stock44 build compile. ${txtrst}"
+        echo "${red} ERROR! ${txtrst}"
+        echo "${bldred} zImage NOT detected. ${txtrst}"
+        echo ""
+        echo ""
+        echo ""
+        echo "${gren} Kernel builder completed all tasks! ${txtrst}"
+        echo ""
+        exit 1
     fi
     echo ""
     echo ""
@@ -735,6 +814,7 @@ fi
 #########################
 
 # Remove older files.
+rm -rf arch/arm/boot/zImage
 rm -rf $PRONAME/ZIP_FILES/boot/bootimg/*
 rm -rf $PRONAME/ZIP_FILES/system/lib/modules/*
 rm -rf $PRONAME/work/boot/*
@@ -744,7 +824,7 @@ rm -rf $PRONAME/work/modules/*
 ## Stock51 version ##
 #####################
 
-if [ $STOCK451 = 1 ]
+if [ $STOCK51 = 1 ]
 then
 
     echo "${txtbld} Starting stock51 compile... ${txtrst}"
@@ -775,41 +855,58 @@ then
     echo ""
     echo ""
 
-    if [ $STOCK51ZIP = 1 ]
+    if [ -e "arch/arm/boot/zImage" ]
     then
-
-        echo "${txtbld} Starting stock51 compress... ${txtrst}"
+        echo "${grn} zImage detected. ${txtrst}"
         echo ""
         echo ""
         echo ""
 
-        echo "${bldblu} Coping files for zip... ${txtrst}"
-        cp $PRONAME/work/modules/* $PRONAME/ZIP_FILES/system/lib/modules/
-        cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/boot/bootimg/
-        echo "${grn} Done. ${txtrst}"
-        echo ""
+        if [ $STOCK51ZIP = 1 ]
+        then
 
-        echo "${bldblu} Zipping... ${txtrst}"
-        cd $PRONAME/ZIP_FILES
-        zip -r $PRONAME.zip *
-        cd -
-        echo "${grn} Done. ${txtrst}"
-        echo ""
+            echo "${txtbld} Starting stock51 compress... ${txtrst}"
+            echo ""
+            echo ""
+            echo ""
 
-        echo "${bldblu} Moving... ${txtrst}"
-        mv $PRONAME/ZIP_FILES/$PRONAME.zip $PRONAME/
-        echo "${grn} Done. ${txtrst}"
-        echo ""
+            echo "${bldblu} Coping files for zip... ${txtrst}"
+            cp $PRONAME/work/modules/* $PRONAME/ZIP_FILES/system/lib/modules/
+            cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/boot/bootimg/
+            echo "${grn} Done. ${txtrst}"
+            echo ""
 
-        echo "${bldblu} Renaming... ${txtrst}"
-        mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$VERSION-stock51.zip
-        echo "${grn} Done. ${txtrst}"
-        echo ""
-        echo ""
-        echo ""
-        echo "${txtbld} Done stock51 build compile with compress. ${txtrst}"
+            echo "${bldblu} Zipping... ${txtrst}"
+            cd $PRONAME/ZIP_FILES
+            zip -r $PRONAME.zip *
+            cd -
+            echo "${grn} Done. ${txtrst}"
+            echo ""
+
+            echo "${bldblu} Moving... ${txtrst}"
+            mv $PRONAME/ZIP_FILES/$PRONAME.zip $PRONAME/
+            echo "${grn} Done. ${txtrst}"
+            echo ""
+
+            echo "${bldblu} Renaming... ${txtrst}"
+            mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$VERSION-stock51.zip
+            echo "${grn} Done. ${txtrst}"
+            echo ""
+            echo ""
+            echo ""
+            echo "${txtbld} Done stock51 build compile with compress. ${txtrst}"
+        else
+            echo "${txtbld} Done stock51 build compile. ${txtrst}"
+        fi
     else
-        echo "${txtbld} Done stock51 build compile. ${txtrst}"
+        echo "${red} ERROR! ${txtrst}"
+        echo "${bldred} zImage NOT detected. ${txtrst}"
+        echo ""
+        echo ""
+        echo ""
+        echo "${gren} Kernel builder completed all tasks! ${txtrst}"
+        echo ""
+        exit 1
     fi
     echo ""
     echo ""
@@ -842,6 +939,7 @@ fi
 #########################
 
 # Remove older files.
+rm -rf arch/arm/boot/zImage
 rm -rf $PRONAME/ZIP_FILES/boot/bootimg/*
 rm -rf $PRONAME/ZIP_FILES/system/lib/modules/*
 rm -rf $PRONAME/work/boot/*
