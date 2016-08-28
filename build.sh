@@ -102,10 +102,12 @@ echo ""
 if [ -e "$PRONAME" ]
 then
     echo "${bldblu} $PRONAME${txtrst}${blu} exist. ${txtrst}"
+    FIRSTRUN=0
 else
     echo "${ylw} $PRONAME not exist. ${txtrst}"
     mkdir $PRONAME
     echo "${grn} Created. ${txtrst}"
+    FIRSTRUN=1
 fi
 
 if [ -e "$PRONAME/work" ]
@@ -132,6 +134,15 @@ then
 else
     echo "${ylw} $PRONAME/work/modules not exist. ${txtrst}"
     mkdir $PRONAME/work/modules
+    echo "${grn} Created. ${txtrst}"
+fi
+
+if [ -e "$PRONAME/ZIP_FILES" ]
+then
+    echo "${bldblu} $PRONAME/ZIP_FILES${txtrst}${blu} exist. ${txtrst}"
+else
+    echo "${ylw} $PRONAME/ZIP_FILES not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES
     echo "${grn} Created. ${txtrst}"
 fi
 
@@ -176,6 +187,36 @@ echo "${txtbld} Done creating folders. ${txtrst}"
 echo ""
 echo ""
 echo ""
+
+if [ FIRSTRUN = 1 ]
+then
+    echo "${txtbld} First run of script detected. ${txtrst}"
+    echo ""
+    if [ -e "$PRONAME/ZIP_FILES" ]
+    then
+        echo "${grn} Created folders. ${txtrst}"
+    else
+        echo "${red} ERROR! ${txtrst}"
+        echo "${bldred} Can't create folders. ${txtrst}"
+        echo "${bldred} Make them manually ${txtrst}"
+        echo "${bldred} or contact with author. ${txtrst}"
+        echo ""
+        echo ""
+        echo ""
+        echo "${gren} Kernel builder completed all tasks! ${txtrst}"
+        echo ""
+        exit 1
+    fi
+    echo "${txtbld} Put Your installer in ZIP_FILES ${txtrst}"
+    echo "${txtbld} and run script again. ${txtrst}"
+    echo ""
+    echo ""
+    echo ""
+    echo "${gren} Kernel builder completed all tasks! ${txtrst}"
+    echo ""
+    exit 0
+fi
+
 echo "${txtbld} Deleting files... ${txtrst}"
 echo ""
 
