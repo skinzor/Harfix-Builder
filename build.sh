@@ -14,7 +14,7 @@
 #                                           #
 # Script based on inplementation            #
 # in Harfix3 kernel for i9300.              #
-# by me of course :)                        #
+# Kernel by me of course :)                 #
 #                                           #
 ##      REMEMBER TO EDIT LOCATIONS!!!      ##
 #############################################
@@ -24,7 +24,7 @@
 ########################  OPTIONS  ##########################
 ##                 (1-enabled, 0-disabled)                 ##
 #                                                           #
-CLEAN=0				# Clean before compile.     #
+CLEAN=1				# Clean before compile.     #
 NORMAL=0			# Compile normal version.   #
     NORMALZIP=1                     # Zip normal version.   #
 SECCLEAN=0			# Clean between versions.   #
@@ -346,21 +346,21 @@ then
     echo "${grn} Done. ${txtrst}"
     echo ""
 
-    # Move compiled files to work folder.
-    echo "${bldblu} Coping modules... ${txtrst}"
-    find -name '*.ko' -exec cp -av {} $PRONAME/work/modules/ \;
-    echo "${grn} Done. ${txtrst}"
-    echo ""
-
-    echo "${bldblu} Coping zImage... ${txtrst}"
-    cp arch/arm/boot/zImage $PRONAME/work/boot/
-    echo "${grn} Done. ${txtrst}"
-    echo ""
-    echo ""
-    echo ""
-
     if [ -e "arch/arm/boot/zImage" ]
     then
+
+        echo "${bldblu} Coping modules... ${txtrst}"
+        find -name '*.ko' -exec cp -av {} $PRONAME/work/modules/ \;
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+
+        echo "${bldblu} Coping zImage... ${txtrst}"
+        cp arch/arm/boot/zImage $PRONAME/work/boot/
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+        echo ""
+        echo ""
+
         echo "${grn} zImage detected. ${txtrst}"
         echo ""
         echo ""
@@ -483,6 +483,17 @@ then
 
     if [ -e "arch/arm/boot/zImage" ]
     then
+
+        echo "${bldblu} Coping modules... ${txtrst}"
+        find -name '*.ko' -exec cp -av {} $PRONAME/work/modules/ \;
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+
+        echo "${bldblu} Coping zImage... ${txtrst}"
+        cp arch/arm/boot/zImage $PRONAME/work/boot/
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+
         echo "${grn} zImage detected. ${txtrst}"
         echo ""
         echo ""
@@ -592,21 +603,19 @@ then
     echo "${grn} Done. ${txtrst}"
     echo ""
 
-    # Move compiled files to work folder.
-    echo "${bldblu} Coping modules... ${txtrst}"
-    find -name '*.ko' -exec cp -av {} $PRONAME/work/modules/ \;
-    echo "${grn} Done. ${txtrst}"
-    echo ""
-
-    echo "${bldblu} Coping zImage... ${txtrst}"
-    cp arch/arm/boot/zImage $PRONAME/work/boot/
-    echo "${grn} Done. ${txtrst}"
-    echo ""
-    echo ""
-    echo ""
-
     if [ -e "arch/arm/boot/zImage" ]
     then
+
+        echo "${bldblu} Coping modules... ${txtrst}"
+        find -name '*.ko' -exec cp -av {} $PRONAME/work/modules/ \;
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+
+        echo "${bldblu} Coping zImage... ${txtrst}"
+        cp arch/arm/boot/zImage $PRONAME/work/boot/
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+
         echo "${grn} zImage detected. ${txtrst}"
         echo ""
         echo ""
@@ -717,21 +726,19 @@ then
     echo "${grn} Done. ${txtrst}"
     echo ""
 
-    # Move compiled files to work folder.
-    echo "${bldblu} Coping modules... ${txtrst}"
-    find -name '*.ko' -exec cp -av {} $PRONAME/work/modules/ \;
-    echo "${grn} Done. ${txtrst}"
-    echo ""
-
-    echo "${bldblu} Coping zImage... ${txtrst}"
-    cp arch/arm/boot/zImage $PRONAME/work/boot/
-    echo "${grn} Done. ${txtrst}"
-    echo ""
-    echo ""
-    echo ""
-
     if [ -e "arch/arm/boot/zImage" ]
     then
+
+        echo "${bldblu} Coping modules... ${txtrst}"
+        find -name '*.ko' -exec cp -av {} $PRONAME/work/modules/ \;
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+
+        echo "${bldblu} Coping zImage... ${txtrst}"
+        cp arch/arm/boot/zImage $PRONAME/work/boot/
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+
         echo "${grn} zImage detected. ${txtrst}"
         echo ""
         echo ""
@@ -842,21 +849,19 @@ then
     echo "${grn} Done. ${txtrst}"
     echo ""
 
-    # Move compiled files to work folder.
-    echo "${bldblu} Coping modules... ${txtrst}"
-    find -name '*.ko' -exec cp -av {} $PRONAME/work/modules/ \;
-    echo "${grn} Done. ${txtrst}"
-    echo ""
-
-    echo "${bldblu} Coping zImage... ${txtrst}"
-    cp arch/arm/boot/zImage $PRONAME/work/boot/
-    echo "${grn} Done. ${txtrst}"
-    echo ""
-    echo ""
-    echo ""
-
     if [ -e "arch/arm/boot/zImage" ]
     then
+
+        echo "${bldblu} Coping modules... ${txtrst}"
+        find -name '*.ko' -exec cp -av {} $PRONAME/work/modules/ \;
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+
+        echo "${bldblu} Coping zImage... ${txtrst}"
+        cp arch/arm/boot/zImage $PRONAME/work/boot/
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+
         echo "${grn} zImage detected. ${txtrst}"
         echo ""
         echo ""
