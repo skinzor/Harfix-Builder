@@ -37,7 +37,7 @@ FOUCLEAN=0                      # Clean between versions.   #
 STOCK44=0                       # Compile stock version.    #
     STOCK44ZIP=1                    # Zip stock version.    #
 FIFCLEAN=0                      # Clean between versions.   #
-STOCK51=1                       # Compile stock version.    #
+STOCK51=0                       # Compile stock version.    #
     STOCK51ZIP=1                    # Zip stock version.    #
 SIXCLEAN=0                      # Latest clean.             #
 PRONAME="Harfix3"               # Project name.             #
@@ -146,6 +146,15 @@ else
     echo "${grn} Created. ${txtrst}"
 fi
 
+if [ -e "$PRONAME/ZIP_FILES/system" ]
+then
+    echo "${bldblu} $PRONAME/ZIP_FILES/system${txtrst}${blu} exist. ${txtrst}"
+else
+    echo "${ylw} $PRONAME/ZIP_FILES/system not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES/system
+    echo "${grn} Created. ${txtrst}"
+fi
+
 if [ -e "$PRONAME/ZIP_FILES/system/lib" ]
 then
     echo "${bldblu} $PRONAME/ZIP_FILES/system/lib${txtrst}${blu} exist. ${txtrst}"
@@ -188,7 +197,7 @@ echo ""
 echo ""
 echo ""
 
-if [ FIRSTRUN = 1 ]
+if [ $FIRSTRUN = 1 ]
 then
     echo "${txtbld} First run of script detected. ${txtrst}"
     echo ""
