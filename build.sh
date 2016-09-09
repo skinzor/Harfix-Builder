@@ -229,7 +229,6 @@ fi
 echo "${txtbld} Deleting files... ${txtrst}"
 echo ""
 
-# Delete old zips and zimage, modules from ZIP_FILES.
 if [ -e "$PRONAME/ZIP_FILES/$PRONAME.zip" ]
 then
     echo "${ylw} $PRONAME/ZIP_FILES/$PRONAME.zip exist. ${txtrst}"
@@ -517,17 +516,6 @@ then
 
     echo "${bldblu} Compiling... ${txtrst}"
     make -j "$JOBS"
-    echo "${grn} Done. ${txtrst}"
-    echo ""
-
-    # Move compiled files to work folder.
-    echo "${bldblu} Coping modules... ${txtrst}"
-    find -name '*.ko' -exec cp -av {} $PRONAME/work/modules/ \;
-    echo "${grn} Done. ${txtrst}"
-    echo ""
-
-    echo "${bldblu} Coping zImage... ${txtrst}"
-    cp arch/arm/boot/zImage $PRONAME/work/boot/
     echo "${grn} Done. ${txtrst}"
     echo ""
 
