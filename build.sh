@@ -1,9 +1,11 @@
 #!/bin/bash
 
 #############################################
+#############################################
 ##                                         ##
 ####           Kernel builder            ####
 ##                                         ##
+#############################################
 #############################################
 ##                  2016                   ##
 #                                           #
@@ -14,78 +16,141 @@
 #                                           #
 # Script based on inplementation            #
 # in Harfix3 kernel for i9300.              #
-# Kernel by me of course :)                 #
+#                                           #
+# Read and edit all things in tables.       #
 #                                           #
 ##      REMEMBER TO EDIT LOCATIONS!!!      ##
 #############################################
+#############################################
 #                                            #
-# If colours looks ugly, use black terminal   #
+# If colours looks ugly, use black terminal.  #
 #                                              #
+#####################################################
+###################  MAIN THINGS  ###################
+#####################################################
+##                                                  ##
+PRONAME="Anarchy"         # Project name.            ##
+VERSION="0.1"             # Version number or name.   ##
+#                                                      ##
+#               New name = new main folder              ##
+#############################################################
 ########################  OPTIONS  ##########################
-##                 (1-enabled, 0-disabled)                 ##
-#                                                           #
-CLEAN=1				# Clean before compile.     #
-NORMAL=0			# Compile normal version.   #
-    NORMALZIP=1                     # Zip normal version.   #
-SECCLEAN=0			# Clean between versions.   #
-MALIFIX=0			# Compile MALI_fix version. #
-    MALIFIXZIP=1                    # Zip MALI_fix version. #
-THICLEAN=0			# Clean between versions.   #
-STOCK43=0                       # Compile stock version.    #
-    STOCK43ZIP=1                    # Zip stock version.    #
-FOUCLEAN=0                      # Clean between versions.   #
-STOCK44=0                       # Compile stock version.    #
-    STOCK44ZIP=1                    # Zip stock version.    #
-FIFCLEAN=0                      # Clean between versions.   #
-STOCK51=0                       # Compile stock version.    #
-    STOCK51ZIP=1                    # Zip stock version.    #
-SIXCLEAN=0                      # Latest clean.             #
-PRONAME="Harfix3"               # Project name.             #
-VERSION="1.1"                   # Version number or name.   #
-#                                                           #
-##       If compile is disabled, zip is disabled too.      ##
+#############################################################
+####              (1-enabled, 0-disabled)                ####
+##                                                         ##
+CLEAN=1				# Clean before compile.    ##
+##        ##  111  ##                                      ##
+MAIN1=1                         # Compile first version.   ##
+    MAINZIP1=1                      # Zip first  version.  ##
+##                                                         ##
+SECCLEAN=0			# Clean between versions.  ##
+##        ##  222  ##                                      ##
+MAIN2=0			        # Compile second version.  ##
+    MAINZIP2=1                      # Zip second version.  ##
+##                                                         ##
+THICLEAN=0			# Clean between versions.  ##
+##        ##  333  ##                                      ##
+MAIN3=0                         # Compile third version.   ##
+    MAINZIP3=1                      # Zip third version.   ##
+##                                                         ##
+FOUCLEAN=0                      # Clean between versions.  ##
+##        ##  444  ##                                      ##
+MAIN4=0                         # Compile fourth version.  ##
+    MAINZIP4=1                      # Zip fourth version.  ##
+##                                                         ##
+FIFCLEAN=0                      # Clean between versions.  ##
+##        ##  555 ##                                       ##
+MAIN5=0                         # Compile fifth version.   ##
+    MAINZIP5=1                      # Zip fifth version.   ##
+##                                                         ##
+SIXCLEAN=0                      # Latest clean.            ##
+##                                                         ##
+####    If compile is disabled, zip is disabled too.     ####
+#############################################################
+####################  Edit not needed  ######################
 #############################################################
 #                                                           #
-# Auto detect Your home folder.                              #
-HOME="$(dirname ~)/$(basename ~)"                             #
-#                                                              #
-########################  EDIT THIS!  ##########################
-#                                                              #
-#                     ##  Shortcuts:  ##                        #
-ARCH="arm"                          # arch of device             #
-TCDIR=$HOME/TC                      # Toolchain dir               #
-TCNAME="gcc-linaro-5.3-2016.02"     # Toolchain name               #
-TCEND="bin/arm-linux-gnueabihf-"    # Toolchain end of name         #
-#                                                                    #
-#                     ##  TC example:  ##                             #
-# $TCDIR/$TCNAME/$TCEND                                                #
-#                                                                       #
-####################################  Configs  #######################################
-#                                                                                    #
-CONFIGNORMAL=custom_i9300_defconfig             # Standard config                    #
-CONFIGMALIFIX=custom_mali_fix_i9300_defconfig   # Standard config with broken fences #
-CONFIGSTOCK43=custom_stock43_i9300_defconfig	# Standard config for stock ROMs     #
-CONFIGSTOCK44=custom_stock44_i9300_defconfig	# Standard config for stock ROMs     #
-CONFIGSTOCK51=custom_stock51_i9300_defconfig	# Standard config for stock ROMs     #
-#                                                                                    #
-######################################################################################
-#                                                                                    #
-#                                                                                    #
+# Auto detect Your home folder.                             #
+HOME="$(dirname ~)/$(basename ~)"                           #
+#                                                           #
+#############################################################
+########################  CONFIGS  ##########################
+#############################################################
+##                                                          ##
+CONFIG1=cyanogenmod_oneplus3_defconfig    # First config     ##
+CONFIG2=                                  # Second config     ##
+CONFIG3=                            	  # Third config       ##
+CONFIG4=                        	  # fourth config       ##
+CONFIG5=                            	  # fifth config         ##
+##                                                                ##
+##                                                                 ##
+#####################################################################
+###########################  EDIT THIS!  ############################
+#####################################################################
+##                                                                 ##
+##                                                                 ##
+ARCH="arm64"                                     # arch of device  ##
+TCDIR=$HOME/TC                                   # Toolchain dir   ##
+TCNAME="gcc-linaro-5.3.1-2016.02-aarch64"        # Toolchain name  ##
+TCEND="bin/aarch64-linux-gnueabihf-"       # End of toolchain name ##
+##                                                                 ##
+##                      ##  TC example:  ##                        ##
+##                     $TCDIR/$TCNAME/$TCEND                       ##
+##                                                                 ##
+#####################################################################
+####################  BUILD SPECIFIC OPTIONS  #######################
+#####################################################################
+##                                                                  ##
+NAME1="normal"                   # Name of first version             ##
+NAME2=""                         # Name of second version             ##
+NAME3=""                         # Name of third version               ##
+NAME4=""                         # Name of fourth version               ##
+NAME5=""                         # Name of fifth version                 ##
+##                                                                        ##
+#############################################################################
+##############################  BUILD PATHS  ################################
+#############################################################################
+##                                                                         ##
+PATHZIMAGE1=""                           # zImage path for first version   ##
+PATHMODULES1="modules"                   # modules path for first version  ##
+##                                                                         ##
+PATHZIMAGE2=""                           # zImage path for second version  ##
+PATHMODULES2=""                          # modules path for second version ##
+##                                                                         ##
+PATHZIMAGE3=""                           # zImage path for third version   ##
+PATHMODULES3=""                          # modules path for third version  ##
+##                                                                         ##
+PATHZIMAGE4=""                           # zImage path for fourth version  ##
+PATHMODULES4=""                          # modules path for fourthversion  ##
+##                                                                         ##
+PATHZIMAGE5=""                           # zImage path for fifth version   ##
+PATHMODULES5=""                          # modules path for fifth version  ##
+##                                                                       ##
+##                                                                     ##
+##                   ##  Path example:  ##                           ##
+##               $PRONAME/ZIP_FILES/PATHZIMAGE                     ##
+##               $PRONAME/ZIP_FILES/PATHMODULES                  ##
+##                                                             ##
+##                                                           ##
+#############################################################
+########################  COLORS  ###########################
+#############################################################
+##                                                         ##
+red=$(tput setaf 1)             # red     # Error          ##
+grn=$(tput setaf 2)             # green   # Done           ##
+ylw=$(tput setaf 11)            # yellow  # Warring        ##
+blu=$(tput setaf 4)             # blue    # path           ##
+gren=$(tput setaf 118)          # green   # Name           ##
+pur=$(tput setaf 201)           # purple  # Name           ##
+txtbld=$(tput bold)             # Bold    # Info           ##
+bldred=${txtbld}$(tput setaf 1) # Red     # Error desc     ##
+bldblu=${txtbld}$(tput setaf 4) # blue    # Info           ##
+txtrst=$(tput sgr0)             # Reset                    ##
+##                                                         ##
+#############################################################
+#############################################################
 
-# Shortcuts (editing isn't needed)
 JOBS="$(grep -c "processor" "/proc/cpuinfo")"   # Maximum jobs that Your computer can do.
-
-# let's colorize :)
-red=$(tput setaf 1)             # red     # Error
-grn=$(tput setaf 2)             # green   # Done
-ylw=$(tput setaf 11)            # yellow  # Warring
-blu=$(tput setaf 4)             # blue    # path
-gren=$(tput setaf 118)          # green   # Name
-pur=$(tput setaf 201)           # purple  # Name
-txtbld=$(tput bold)             # Bold    # Info
-bldred=${txtbld}$(tput setaf 1) # Red     # Error desc
-bldblu=${txtbld}$(tput setaf 4) # blue    # Info
-txtrst=$(tput sgr0)             # Reset
 
 echo -e '\0033\0143'
 echo ""
@@ -355,7 +420,115 @@ else
     exit 1
 fi
 
+#############
+# Functions #
+#############
 
+function COMPILEZIP
+{
+    if [ $MAIN = 1 ]
+    then
+
+        echo "${txtbld} Starting $NAME compile... ${txtrst}"
+        echo ""
+        echo ""
+        echo ""
+
+        echo "${bldblu} Loading config... ${txtrst}"
+        make $CONFIG
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+
+        echo "${bldblu} Compiling... ${txtrst}"
+        make -j "$JOBS"
+        echo "${grn} Done. ${txtrst}"
+        echo ""
+
+        if [ -e "arch/arm/boot/zImage" ]
+        then
+
+            echo "${bldblu} Coping modules... ${txtrst}"
+            find -name '*.ko' -exec cp -av {} $PRONAME/work/modules/ \;
+            echo "${grn} Done. ${txtrst}"
+            echo ""
+
+            echo "${bldblu} Coping zImage... ${txtrst}"
+            cp arch/arm/boot/zImage $PRONAME/work/boot/
+            echo "${grn} Done. ${txtrst}"
+            echo ""
+            echo ""
+            echo ""
+
+            echo "${grn} zImage detected. ${txtrst}"
+            echo ""
+            echo ""
+            echo ""
+
+            if [ $MAINZIP = 1 ]
+            then
+
+                echo "${txtbld} Starting $NAME compress... ${txtrst}"
+                echo ""
+                echo ""
+                echo ""
+
+                echo "${bldblu} Coping files for zip... ${txtrst}"
+                cp $PRONAME/work/modules/* $PRONAME/ZIP_FILES/$PATHMODULES/
+                cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/$PATHZIMAGE/
+                echo "${grn} Done. ${txtrst}"
+                echo ""
+
+                echo "${bldblu} Zipping... ${txtrst}"
+                cd $PRONAME/ZIP_FILES
+                zip -r $PRONAME.zip *
+                cd -
+                echo "${grn} Done. ${txtrst}"
+                echo ""
+
+                echo "${bldblu} Moving... ${txtrst}"
+                mv $PRONAME/ZIP_FILES/$PRONAME.zip $PRONAME/
+                echo "${grn} Done. ${txtrst}"
+                echo ""
+
+                echo "${bldblu} Renaming... ${txtrst}"
+                mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$NAME-$VERSION.zip
+                echo "${grn} Done. ${txtrst}"
+                echo ""
+                echo ""
+                echo ""
+                echo "${txtbld} Done $NAME build compile with compress. ${txtrst}"
+            else
+                echo "${txtbld} Done $NAME build compile. ${txtrst}"
+            fi
+        else
+            echo "${red} ERROR! ${txtrst}"
+            echo "${bldred} zImage NOT detected. ${txtrst}"
+            echo ""
+            echo ""
+            echo ""
+            echo "${gren} Kernel builder completed all tasks! ${txtrst}"
+            echo ""
+            exit 1
+        fi
+        echo ""
+        echo ""
+        echo ""
+    else
+        echo "${ylw} Skipped $NAME build. ${txtrst}"
+        echo ""
+        echo ""
+        echo ""
+    fi
+}
+
+function CLEANER
+{
+    rm -rf arch/arm/boot/zImage
+    rm -rf $PRONAME/ZIP_FILES/$PATHZIMAGE/*
+    rm -rf $PRONAME/ZIP_FILES/$PATHMODULES/*
+    rm -rf $PRONAME/work/boot/*
+    rm -rf $PRONAME/work/modules/*
+}
 ###########
 ## Clean ##
 ###########
@@ -373,103 +546,18 @@ then
 fi
 
 
-####################
-## Normal version ##
-####################
+###############
+## Compiling ##
+###############
 
-if [ $NORMAL = 1 ]
-then
-
-    echo "${txtbld} Starting Normal compile... ${txtrst}"
-    echo ""
-    echo ""
-    echo ""
-
-    echo "${bldblu} Loading config... ${txtrst}"
-    make $CONFIGNORMAL
-    echo "${grn} Done. ${txtrst}"
-    echo ""
-
-    echo "${bldblu} Compiling... ${txtrst}"
-    make -j "$JOBS"
-    echo "${grn} Done. ${txtrst}"
-    echo ""
-
-    if [ -e "arch/arm/boot/zImage" ]
-    then
-
-        echo "${bldblu} Coping modules... ${txtrst}"
-        find -name '*.ko' -exec cp -av {} $PRONAME/work/modules/ \;
-        echo "${grn} Done. ${txtrst}"
-        echo ""
-
-        echo "${bldblu} Coping zImage... ${txtrst}"
-        cp arch/arm/boot/zImage $PRONAME/work/boot/
-        echo "${grn} Done. ${txtrst}"
-        echo ""
-        echo ""
-        echo ""
-
-        echo "${grn} zImage detected. ${txtrst}"
-        echo ""
-        echo ""
-        echo ""
-
-        if [ $NORMALZIP = 1 ]
-        then
-
-            echo "${txtbld} Starting Normal compress... ${txtrst}"
-            echo ""
-            echo ""
-            echo ""
-
-            echo "${bldblu} Coping files for zip... ${txtrst}"
-            cp $PRONAME/work/modules/* $PRONAME/ZIP_FILES/system/lib/modules/
-            cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/boot/bootimg/
-            echo "${grn} Done. ${txtrst}"
-            echo ""
-
-            echo "${bldblu} Zipping... ${txtrst}"
-            cd $PRONAME/ZIP_FILES
-            zip -r $PRONAME.zip *
-            cd -
-            echo "${grn} Done. ${txtrst}"
-            echo ""
-
-            echo "${bldblu} Moving... ${txtrst}"
-            mv $PRONAME/ZIP_FILES/$PRONAME.zip $PRONAME/
-            echo "${grn} Done. ${txtrst}"
-            echo ""
-
-            echo "${bldblu} Renaming... ${txtrst}"
-            mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$VERSION.zip
-            echo "${grn} Done. ${txtrst}"
-            echo ""
-            echo ""
-            echo ""
-            echo "${txtbld} Done normal build compile with compress. ${txtrst}"
-        else
-            echo "${txtbld} Done normal build compile. ${txtrst}"
-        fi
-    else
-        echo "${red} ERROR! ${txtrst}"
-        echo "${bldred} zImage NOT detected. ${txtrst}"
-        echo ""
-        echo ""
-        echo ""
-        echo "${gren} Kernel builder completed all tasks! ${txtrst}"
-        echo ""
-        exit 1
-    fi
-    echo ""
-    echo ""
-    echo ""
-else
-    echo "${ylw} Skipped normal build. ${txtrst}"
-    echo ""
-    echo ""
-    echo ""
-fi
+MAIN=$MAIN1
+MAINZIP=$MAINZIP1
+NAME=$NAME1
+CONFIG=$CONFIG1
+PATHMODULES=$PATHMODULES1
+PATHZIMAGE=$PATHZIMAGE1
+COMPILEZIP
+CLEANER
 
 ##################
 ## Second clean ##
@@ -487,111 +575,18 @@ then
     echo ""
 fi
 
-#########################
-# Clean between version #   Copy that between other versions.
-#########################
+###############
+## Compiling ##
+###############
 
-# Remove older files.
-rm -rf arch/arm/boot/zImage
-rm -rf $PRONAME/ZIP_FILES/boot/bootimg/*
-rm -rf $PRONAME/ZIP_FILES/system/lib/modules/*
-rm -rf $PRONAME/work/boot/*
-rm -rf $PRONAME/work/modules/*
-
-####################
-## MALI fix Build ##
-####################
-
-if [ $MALIFIX = 1 ]
-then
-    echo "${txtbld} Starting MALI_FIX compile... ${txtrst}"
-    echo ""
-    echo ""
-    echo ""
-
-    echo "${bldblu} Loading config... ${txtrst}"
-    make $CONFIGMALIFIX
-    echo "${grn} Done. ${txtrst}"
-    echo ""
-
-    echo "${bldblu} Compiling... ${txtrst}"
-    make -j "$JOBS"
-    echo "${grn} Done. ${txtrst}"
-    echo ""
-
-    if [ -e "arch/arm/boot/zImage" ]
-    then
-
-        echo "${bldblu} Coping modules... ${txtrst}"
-        find -name '*.ko' -exec cp -av {} $PRONAME/work/modules/ \;
-        echo "${grn} Done. ${txtrst}"
-        echo ""
-
-        echo "${bldblu} Coping zImage... ${txtrst}"
-        cp arch/arm/boot/zImage $PRONAME/work/boot/
-        echo "${grn} Done. ${txtrst}"
-        echo ""
-
-        echo "${grn} zImage detected. ${txtrst}"
-        echo ""
-        echo ""
-        echo ""
-
-        if [ $MALIFIXZIP = 1 ]
-        then
-
-            echo "${txtbld} Starting MALI_fix compress... ${txtrst}"
-            echo ""
-            echo ""
-            echo ""
-
-            echo "${bldblu} Coping files for zip... ${txtrst}"
-            cp $PRONAME/work/modules/* $PRONAME/ZIP_FILES/system/lib/modules/
-            cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/boot/bootimg/
-            echo "${grn} Done. ${txtrst}"
-            echo ""
-
-            echo "${bldblu} Zipping... ${txtrst}"
-            cd $PRONAME/ZIP_FILES
-            zip -r $PRONAME.zip *
-            cd -
-            echo "${grn} Done. ${txtrst}"
-            echo ""
-
-            echo "${bldblu} Moving... ${txtrst}"
-            mv $PRONAME/ZIP_FILES/$PRONAME.zip $PRONAME/
-            echo "${grn} Done. ${txtrst}"
-            echo ""
-
-            echo "${bldblu} Renaming... ${txtrst}"
-            mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$VERSION-MALI_fix.zip
-            echo "${grn} Done. ${txtrst}"
-            echo ""
-            echo ""
-            echo ""
-            echo "${txtbld} Done MALI_FIX build compile with compress. ${txtrst}"
-        else
-            echo "${txtbld} Done MALI_FIX build compile. ${txtrst}"
-        fi
-    else
-        echo "${red} ERROR! ${txtrst}"
-        echo "${bldred} zImage NOT detected. ${txtrst}"
-        echo ""
-        echo ""
-        echo ""
-        echo "${gren} Kernel builder completed all tasks! ${txtrst}"
-        echo ""
-        exit 1
-    fi
-    echo ""
-    echo ""
-    echo ""
-else
-    echo "${ylw} Skipped MALI_fix build. ${txtrst}"
-    echo ""
-    echo ""
-    echo ""
-fi
+MAIN=$MAIN2
+MAINZIP=$MAINZIP2
+NAME=$NAME2
+CONFIG=$CONFIG2
+PATHMODULES=$PATHMODULES2
+PATHZIMAGE=$PATHZIMAGE2
+COMPILEZIP
+CLEANER
 
 #################
 ## Third clean ##
@@ -608,112 +603,18 @@ then
     echo ""
 fi
 
-#########################
-# Clean between version #   Copy that between other versions.
-#########################
+###############
+## Compiling ##
+###############
 
-# Remove older files.
-rm -rf arch/arm/boot/zImage
-rm -rf $PRONAME/ZIP_FILES/boot/bootimg/*
-rm -rf $PRONAME/ZIP_FILES/system/lib/modules/*
-rm -rf $PRONAME/work/boot/*
-rm -rf $PRONAME/work/modules/*
-
-#####################
-## Stock43 version ##
-#####################
-
-if [ $STOCK43 = 1 ]
-then
-
-    echo "${txtbld} Starting stock43 compile... ${txtrst}"
-    echo ""
-    echo ""
-    echo ""
-
-    echo "${bldblu} Loading config... ${txtrst}"
-    make $CONFIGSTOCK43
-    echo "${grn} Done. ${txtrst}"
-    echo ""
-
-    echo "${bldblu} Compiling... ${txtrst}"
-    make -j "$JOBS"
-    echo "${grn} Done. ${txtrst}"
-    echo ""
-
-    if [ -e "arch/arm/boot/zImage" ]
-    then
-
-        echo "${bldblu} Coping modules... ${txtrst}"
-        find -name '*.ko' -exec cp -av {} $PRONAME/work/modules/ \;
-        echo "${grn} Done. ${txtrst}"
-        echo ""
-
-        echo "${bldblu} Coping zImage... ${txtrst}"
-        cp arch/arm/boot/zImage $PRONAME/work/boot/
-        echo "${grn} Done. ${txtrst}"
-        echo ""
-
-        echo "${grn} zImage detected. ${txtrst}"
-        echo ""
-        echo ""
-        echo ""
-
-        if [ $STOCK43ZIP = 1 ]
-        then
-
-            echo "${txtbld} Starting stock43 compress... ${txtrst}"
-            echo ""
-            echo ""
-            echo ""
-
-            echo "${bldblu} Coping files for zip... ${txtrst}"
-            cp $PRONAME/work/modules/* $PRONAME/ZIP_FILES/system/lib/modules/
-            cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/boot/bootimg/
-            echo "${grn} Done. ${txtrst}"
-            echo ""
-
-            echo "${bldblu} Zipping... ${txtrst}"
-            cd $PRONAME/ZIP_FILES
-            zip -r $PRONAME.zip *
-            cd -
-            echo "${grn} Done. ${txtrst}"
-            echo ""
-
-            echo "${bldblu} Moving... ${txtrst}"
-            mv $PRONAME/ZIP_FILES/$PRONAME.zip $PRONAME/
-            echo "${grn} Done. ${txtrst}"
-            echo ""
-
-            echo "${bldblu} Renaming... ${txtrst}"
-            mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$VERSION-stock43.zip
-            echo "${grn} Done. ${txtrst}"
-            echo ""
-            echo ""
-            echo ""
-            echo "${txtbld} Done stock43 build compile with compress. ${txtrst}"
-        else
-            echo "${txtbld} Done stock43 build compile. ${txtrst}"
-        fi
-    else
-        echo "${red} ERROR! ${txtrst}"
-        echo "${bldred} zImage NOT detected. ${txtrst}"
-        echo ""
-        echo ""
-        echo ""
-        echo "${gren} Kernel builder completed all tasks! ${txtrst}"
-        echo ""
-        exit 1
-    fi
-    echo ""
-    echo ""
-    echo ""
-else
-    echo "${ylw} Skipped stock43 build. ${txtrst}"
-    echo ""
-    echo ""
-    echo ""
-fi
+MAIN=$MAIN3
+MAINZIP=$MAINZIP3
+NAME=$NAME3
+CONFIG=$CONFIG3
+PATHMODULES=$PATHMODULES3
+PATHZIMAGE=$PATHZIMAGE3
+COMPILEZIP
+CLEANER
 
 ##################
 ## Fourth clean ##
@@ -731,112 +632,18 @@ then
     echo ""
 fi
 
-#########################
-# Clean between version #   Copy that between other versions.
-#########################
+###############
+## Compiling ##
+###############
 
-# Remove older files.
-rm -rf arch/arm/boot/zImage
-rm -rf $PRONAME/ZIP_FILES/boot/bootimg/*
-rm -rf $PRONAME/ZIP_FILES/system/lib/modules/*
-rm -rf $PRONAME/work/boot/*
-rm -rf $PRONAME/work/modules/*
-
-#####################
-## Stock44 version ##
-#####################
-
-if [ $STOCK44 = 1 ]
-then
-
-    echo "${txtbld} Starting stock44 compile... ${txtrst}"
-    echo ""
-    echo ""
-    echo ""
-
-    echo "${bldblu} Loading config... ${txtrst}"
-    make $CONFIGSTOCK44
-    echo "${grn} Done. ${txtrst}"
-    echo ""
-
-    echo "${bldblu} Compiling... ${txtrst}"
-    make -j "$JOBS"
-    echo "${grn} Done. ${txtrst}"
-    echo ""
-
-    if [ -e "arch/arm/boot/zImage" ]
-    then
-
-        echo "${bldblu} Coping modules... ${txtrst}"
-        find -name '*.ko' -exec cp -av {} $PRONAME/work/modules/ \;
-        echo "${grn} Done. ${txtrst}"
-        echo ""
-
-        echo "${bldblu} Coping zImage... ${txtrst}"
-        cp arch/arm/boot/zImage $PRONAME/work/boot/
-        echo "${grn} Done. ${txtrst}"
-        echo ""
-
-        echo "${grn} zImage detected. ${txtrst}"
-        echo ""
-        echo ""
-        echo ""
-
-        if [ $STOCK44ZIP = 1 ]
-        then
-
-            echo "${txtbld} Starting stock44 compress... ${txtrst}"
-            echo ""
-            echo ""
-            echo ""
-
-            echo "${bldblu} Coping files for zip... ${txtrst}"
-            cp $PRONAME/work/modules/* $PRONAME/ZIP_FILES/system/lib/modules/
-            cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/boot/bootimg/
-            echo "${grn} Done. ${txtrst}"
-            echo ""
-
-            echo "${bldblu} Zipping... ${txtrst}"
-            cd $PRONAME/ZIP_FILES
-            zip -r $PRONAME.zip *
-            cd -
-            echo "${grn} Done. ${txtrst}"
-            echo ""
-
-            echo "${bldblu} Moving... ${txtrst}"
-            mv $PRONAME/ZIP_FILES/$PRONAME.zip $PRONAME/
-            echo "${grn} Done. ${txtrst}"
-            echo ""
-
-            echo "${bldblu} Renaming... ${txtrst}"
-            mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$VERSION-stock44.zip
-            echo "${grn} Done. ${txtrst}"
-            echo ""
-            echo ""
-            echo ""
-            echo "${txtbld} Done stock44 build compile with compress. ${txtrst}"
-        else
-            echo "${txtbld} Done stock44 build compile. ${txtrst}"
-        fi
-    else
-        echo "${red} ERROR! ${txtrst}"
-        echo "${bldred} zImage NOT detected. ${txtrst}"
-        echo ""
-        echo ""
-        echo ""
-        echo "${gren} Kernel builder completed all tasks! ${txtrst}"
-        echo ""
-        exit 1
-    fi
-    echo ""
-    echo ""
-    echo ""
-else
-    echo "${ylw} Skipped stock44 build. ${txtrst}"
-    echo ""
-    echo ""
-    echo ""
-fi
+MAIN=$MAIN4
+MAINZIP=$MAINZIP4
+NAME=$NAME4
+CONFIG=$CONFIG4
+PATHMODULES=$PATHMODULES4
+PATHZIMAGE=$PATHZIMAGE4
+COMPILEZIP
+CLEANER
 
 #################
 ## Fifth clean ##
@@ -854,112 +661,18 @@ then
     echo ""
 fi
 
-#########################
-# Clean between version #   Copy that between other versions.
-#########################
+###############
+## Compiling ##
+###############
 
-# Remove older files.
-rm -rf arch/arm/boot/zImage
-rm -rf $PRONAME/ZIP_FILES/boot/bootimg/*
-rm -rf $PRONAME/ZIP_FILES/system/lib/modules/*
-rm -rf $PRONAME/work/boot/*
-rm -rf $PRONAME/work/modules/*
-
-#####################
-## Stock51 version ##
-#####################
-
-if [ $STOCK51 = 1 ]
-then
-
-    echo "${txtbld} Starting stock51 compile... ${txtrst}"
-    echo ""
-    echo ""
-    echo ""
-
-    echo "${bldblu} Loading config... ${txtrst}"
-    make $CONFIGSTOCK51
-    echo "${grn} Done. ${txtrst}"
-    echo ""
-
-    echo "${bldblu} Compiling... ${txtrst}"
-    make -j "$JOBS"
-    echo "${grn} Done. ${txtrst}"
-    echo ""
-
-    if [ -e "arch/arm/boot/zImage" ]
-    then
-
-        echo "${bldblu} Coping modules... ${txtrst}"
-        find -name '*.ko' -exec cp -av {} $PRONAME/work/modules/ \;
-        echo "${grn} Done. ${txtrst}"
-        echo ""
-
-        echo "${bldblu} Coping zImage... ${txtrst}"
-        cp arch/arm/boot/zImage $PRONAME/work/boot/
-        echo "${grn} Done. ${txtrst}"
-        echo ""
-
-        echo "${grn} zImage detected. ${txtrst}"
-        echo ""
-        echo ""
-        echo ""
-
-        if [ $STOCK51ZIP = 1 ]
-        then
-
-            echo "${txtbld} Starting stock51 compress... ${txtrst}"
-            echo ""
-            echo ""
-            echo ""
-
-            echo "${bldblu} Coping files for zip... ${txtrst}"
-            cp $PRONAME/work/modules/* $PRONAME/ZIP_FILES/system/lib/modules/
-            cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/boot/bootimg/
-            echo "${grn} Done. ${txtrst}"
-            echo ""
-
-            echo "${bldblu} Zipping... ${txtrst}"
-            cd $PRONAME/ZIP_FILES
-            zip -r $PRONAME.zip *
-            cd -
-            echo "${grn} Done. ${txtrst}"
-            echo ""
-
-            echo "${bldblu} Moving... ${txtrst}"
-            mv $PRONAME/ZIP_FILES/$PRONAME.zip $PRONAME/
-            echo "${grn} Done. ${txtrst}"
-            echo ""
-
-            echo "${bldblu} Renaming... ${txtrst}"
-            mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$VERSION-stock51.zip
-            echo "${grn} Done. ${txtrst}"
-            echo ""
-            echo ""
-            echo ""
-            echo "${txtbld} Done stock51 build compile with compress. ${txtrst}"
-        else
-            echo "${txtbld} Done stock51 build compile. ${txtrst}"
-        fi
-    else
-        echo "${red} ERROR! ${txtrst}"
-        echo "${bldred} zImage NOT detected. ${txtrst}"
-        echo ""
-        echo ""
-        echo ""
-        echo "${gren} Kernel builder completed all tasks! ${txtrst}"
-        echo ""
-        exit 1
-    fi
-    echo ""
-    echo ""
-    echo ""
-else
-    echo "${ylw} Skipped stock51 build. ${txtrst}"
-    echo ""
-    echo ""
-    echo ""
-fi
+MAIN=$MAIN5
+MAINZIP=$MAINZIP5
+NAME=$NAME5
+CONFIG=$CONFIG5
+PATHMODULES=$PATHMODULES5
+PATHZIMAGE=$PATHZIMAGE5
+COMPILEZIP
+CLEANER
 
 #################
 ## Sixth clean ##
@@ -976,17 +689,6 @@ then
     echo ""
     echo ""
 fi
-
-#########################
-# Clean between version #   Copy that between other versions.
-#########################
-
-# Remove older files.
-rm -rf arch/arm/boot/zImage
-rm -rf $PRONAME/ZIP_FILES/boot/bootimg/*
-rm -rf $PRONAME/ZIP_FILES/system/lib/modules/*
-rm -rf $PRONAME/work/boot/*
-rm -rf $PRONAME/work/modules/*
 
 ################
 # Latest clean #
