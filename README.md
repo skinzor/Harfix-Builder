@@ -7,4 +7,4 @@ Open script with any text editor and read first lines of code and then edit sett
 Officially used in:
 Harfix2
 Harfix3
-
+Anarchy
