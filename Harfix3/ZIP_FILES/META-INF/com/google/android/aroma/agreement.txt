@@ -1,5 +1,0 @@
-<b>Terms of use:</b>
-
-<*>I am not responsible for any damage</*>
-<*>Your warranty is now void</*>
-<*>By using this kernel you agree with terms of use</*>
