@@ -211,48 +211,93 @@ else
     echo "${grn} Created. ${txtrst}"
 fi
 
-if [ -e "$PRONAME/ZIP_FILES/system" ]
+if [ -e "$PRONAME/ZIP_FILES/$PATHZIMAGE1" ]
 then
-    echo "${bldblu} $PRONAME/ZIP_FILES/system${txtrst}${blu} exist. ${txtrst}"
+    echo "${bldblu} $PRONAME/ZIP_FILES/$PATHZIMAGE1${txtrst}${blu} exist. ${txtrst}"
 else
-    echo "${ylw} $PRONAME/ZIP_FILES/system not exist. ${txtrst}"
-    mkdir $PRONAME/ZIP_FILES/system
+    echo "${ylw} $PRONAME/ZIP_FILES/$PATHZIMAGE1 not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES/$PATHZIMAGE1
     echo "${grn} Created. ${txtrst}"
 fi
 
-if [ -e "$PRONAME/ZIP_FILES/system/lib" ]
+if [ -e "$PRONAME/ZIP_FILES/$PATHZIMAGE2" ]
 then
-    echo "${bldblu} $PRONAME/ZIP_FILES/system/lib${txtrst}${blu} exist. ${txtrst}"
+    echo "${bldblu} $PRONAME/ZIP_FILES/$PATHZIMAGE2${txtrst}${blu} exist. ${txtrst}"
 else
-    echo "${ylw} $PRONAME/ZIP_FILES/system/lib not exist. ${txtrst}"
-    mkdir $PRONAME/ZIP_FILES/system/lib
+    echo "${ylw} $PRONAME/ZIP_FILES/$PATHZIMAGE2 not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES/$PATHZIMAGE2
     echo "${grn} Created. ${txtrst}"
 fi
 
-if [ -e "$PRONAME/ZIP_FILES/system/lib/modules" ]
+if [ -e "$PRONAME/ZIP_FILES/$PATHZIMAGE3" ]
 then
-    echo "${bldblu} $PRONAME/ZIP_FILES/system/lib/modules${txtrst}${blu} exist. ${txtrst}"
+    echo "${bldblu} $PRONAME/ZIP_FILES/$PATHZIMAGE3${txtrst}${blu} exist. ${txtrst}"
 else
-    echo "${ylw} $PRONAME/ZIP_FILES/system/lib/modules not exist. ${txtrst}"
-    mkdir $PRONAME/ZIP_FILES/system/lib/modules
+    echo "${ylw} $PRONAME/ZIP_FILES/$PATHZIMAGE3 not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES/$PATHZIMAGE3
     echo "${grn} Created. ${txtrst}"
 fi
 
-if [ -e "$PRONAME/ZIP_FILES/boot" ]
+if [ -e "$PRONAME/ZIP_FILES/$PATHZIMAGE4" ]
 then
-    echo "${bldblu} $PRONAME/ZIP_FILES/boot${txtrst}${blu} exist. ${txtrst}"
+    echo "${bldblu} $PRONAME/ZIP_FILES/$PATHZIMAGE4${txtrst}${blu} exist. ${txtrst}"
 else
-    echo "${ylw} $PRONAME/ZIP_FILES/boot not exist. ${txtrst}"
-    mkdir $PRONAME/ZIP_FILES/boot
+    echo "${ylw} $PRONAME/ZIP_FILES/$PATHZIMAGE4 not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES/$PATHZIMAGE4
     echo "${grn} Created. ${txtrst}"
 fi
 
-if [ -e "$PRONAME/ZIP_FILES/boot/bootimg" ]
+if [ -e "$PRONAME/ZIP_FILES/$PATHZIMAGE5" ]
 then
-    echo "${bldblu} $PRONAME/ZIP_FILES/boot/bootimg${txtrst}${blu} exist. ${txtrst}"
+    echo "${bldblu} $PRONAME/ZIP_FILES/$PATHZIMAGE5${txtrst}${blu} exist. ${txtrst}"
 else
-    echo "${ylw} $PRONAME/ZIP_FILES/boot/bootimg not exist. ${txtrst}"
-    mkdir $PRONAME/ZIP_FILES/boot/bootimg
+    echo "${ylw} $PRONAME/ZIP_FILES/$PATHZIMAGE5 not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES/$PATHZIMAGE5
+    echo "${grn} Created. ${txtrst}"
+fi
+
+if [ -e "$PRONAME/ZIP_FILES/$PATHMODULES1" ]
+then
+    echo "${bldblu} $PRONAME/ZIP_FILES/$PATHMODULES1${txtrst}${blu} exist. ${txtrst}"
+else
+    echo "${ylw} $PRONAME/ZIP_FILES/$PATHMODULES1 not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES/$PATHMODULES1
+    echo "${grn} Created. ${txtrst}"
+fi
+
+if [ -e "$PRONAME/ZIP_FILES/$PATHMODULES2" ]
+then
+    echo "${bldblu} $PRONAME/ZIP_FILES/$PATHMODULES2${txtrst}${blu} exist. ${txtrst}"
+else
+    echo "${ylw} $PRONAME/ZIP_FILES/$PATHMODULES2 not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES/$PATHMODULES2
+    echo "${grn} Created. ${txtrst}"
+fi
+
+if [ -e "$PRONAME/ZIP_FILES/$PATHMODULES3" ]
+then
+    echo "${bldblu} $PRONAME/ZIP_FILES/$PATHMODULES3${txtrst}${blu} exist. ${txtrst}"
+else
+    echo "${ylw} $PRONAME/ZIP_FILES/$PATHMODULES3 not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES/$PATHMODULES3
+    echo "${grn} Created. ${txtrst}"
+fi
+
+if [ -e "$PRONAME/ZIP_FILES/$PATHMODULES4" ]
+then
+    echo "${bldblu} $PRONAME/ZIP_FILES/$PATHMODULES4${txtrst}${blu} exist. ${txtrst}"
+else
+    echo "${ylw} $PRONAME/ZIP_FILES/$PATHMODULES4 not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES/$PATHMODULES4
+    echo "${grn} Created. ${txtrst}"
+fi
+
+if [ -e "$PRONAME/ZIP_FILES/$PATHMODULES5" ]
+then
+    echo "${bldblu} $PRONAME/ZIP_FILES/$PATHMODULES5${txtrst}${blu} exist. ${txtrst}"
+else
+    echo "${ylw} $PRONAME/ZIP_FILES/$PATHMODULES5 not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES/$PATHMODULES5
     echo "${grn} Created. ${txtrst}"
 fi
 
@@ -321,49 +366,49 @@ else
     echo "${bldblu} $PRONAME/work/modules/*${txtrst}${blu} not exist. ${txtrst}"
 fi
 
-if [ -e "$PRONAME/$PRONAME-$VERSION.zip" ]
+if [ -e "$PRONAME/$PRONAME-$VERSION-$NAME1.zip" ]
 then
-    echo "${ylw} $PRONAME-$VERSION.zip exist. ${txtrst}"
-    rm -rf $PRONAME/$PRONAME-$VERSION.zip
+    echo "${ylw} $PRONAME-$VERSION-$NAME1.zip exist. ${txtrst}"
+    rm -rf $PRONAME/$PRONAME-$VERSION-$NAME1.zip
     echo "${grn} Deleted. ${txtrst}"
 else
-    echo "${bldblu} $PRONAME-$VERSION.zip${txtrst}${blu} not exist. ${txtrst}"
+    echo "${bldblu} $PRONAME-$VERSION-$NAME1.zip${txtrst}${blu} not exist. ${txtrst}"
 fi
 
-if [ -e "$PRONAME/$PRONAME-$VERSION-MALI_fix.zip" ]
+if [ -e "$PRONAME/$PRONAME-$VERSION-$NAME2.zip" ]
 then
-    echo "${ylw} $PRONAME-$VERSION-MALI_fix.zip exist. ${txtrst}"
-    rm -rf $PRONAME/$PRONAME-$VERSION-MALI_fix.zip
+    echo "${ylw} $PRONAME-$VERSION-$NAME2.zip exist. ${txtrst}"
+    rm -rf $PRONAME/$PRONAME-$VERSION-M$NAME2.zip
     echo "${grn} Deleted. ${txtrst}"
 else
-    echo "${bldblu} $PRONAME-$VERSION-MALI_fix.zip${txtrst}${blu} not exist. ${txtrst}"
+    echo "${bldblu} $PRONAME-$VERSION-$NAME2.zip${txtrst}${blu} not exist. ${txtrst}"
 fi
 
-if [ -e "$PRONAME/$PRONAME-$VERSION-stock43.zip" ]
+if [ -e "$PRONAME/$PRONAME-$VERSION-$NAME3.zip" ]
 then
-    echo "${ylw} $PRONAME-$VERSION-stock43.zip exist. ${txtrst}"
-    rm -rf $PRONAME/$PRONAME-$VERSION-stock43.zip
+    echo "${ylw} $PRONAME-$VERSION-$NAME3.zip exist. ${txtrst}"
+    rm -rf $PRONAME/$PRONAME-$VERSION-$NAME3.zip
     echo "${grn} Deleted. ${txtrst}"
 else
-    echo "${bldblu} $PRONAME-$VERSION-stock43.zip${txtrst}${blu} not exist. ${txtrst}"
+    echo "${bldblu} $PRONAME-$VERSION-$NAME3.zip${txtrst}${blu} not exist. ${txtrst}"
 fi
 
-if [ -e "$PRONAME/$PRONAME-$VERSION-stock44.zip" ]
+if [ -e "$PRONAME/$PRONAME-$VERSION-$NAME4.zip" ]
 then
-    echo "${ylw} $PRONAME-$VERSION-stock44.zip exist. ${txtrst}"
-    rm -rf $PRONAME/$PRONAME-$VERSION-stock44.zip
+    echo "${ylw} $PRONAME-$VERSION-$NAME5.zip exist. ${txtrst}"
+    rm -rf $PRONAME/$PRONAME-$VERSION-$NAME4.zip
     echo "${grn} Deleted. ${txtrst}"
 else
-    echo "${bldblu} $PRONAME-$VERSION-stock44.zip${txtrst}${blu} not exist. ${txtrst}"
+    echo "${bldblu} $PRONAME-$VERSION-$NAME4.zip${txtrst}${blu} not exist. ${txtrst}"
 fi
 
-if [ -e "$PRONAME/$PRONAME-$VERSION-stock51.zip" ]
+if [ -e "$PRONAME/$PRONAME-$VERSION-$NAME5.zip" ]
 then
-    echo "${ylw} $PRONAME-$VERSION-stock51.zip exist. ${txtrst}"
-    rm -rf $PRONAME/$PRONAME-$VERSION-stock51.zip
+    echo "${ylw} $PRONAME-$VERSION-$NAME5.zip exist. ${txtrst}"
+    rm -rf $PRONAME/$PRONAME-$VERSION-$NAME5.zip
     echo "${grn} Deleted. ${txtrst}"
 else
-    echo "${bldblu} $PRONAME-$VERSION-stock51.zip${txtrst}${blu} not exist. ${txtrst}"
+    echo "${bldblu} $PRONAME-$VERSION-$NAME5.zip${txtrst}${blu} not exist. ${txtrst}"
 fi
 
 if [ -e "$PRONAME/ZIP_FILES/boot/bootimg/zImage" ]
