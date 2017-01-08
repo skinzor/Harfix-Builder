@@ -7,7 +7,7 @@
 ##                                         ##
 #############################################
 #############################################
-##                  2016                   ##
+##               2016-2017                 ##
 #                                           #
 # Build script for Kernels.                 #
 # By wisniew99 / rafciowis1999              #
@@ -29,7 +29,7 @@
 ###################  MAIN THINGS  ###################
 #####################################################
 ##                                                  ##
-PRONAME="Anarchy"         # Project name.            ##
+PRONAME="Harfix4"         # Project name.            ##
 VERSION="0.1"             # Version number or name.   ##
 #                                                      ##
 #               New name = new main folder              ##
@@ -41,7 +41,7 @@ VERSION="0.1"             # Version number or name.   ##
 CLEAN=1				# Clean before compile.    ##
 ##        ##  111  ##                                      ##
 MAIN1=1                         # Compile first version.   ##
-    MAINZIP1=1                      # Zip first  version.  ##
+    MAINZIP1=0                      # Zip first  version.  ##
 ##                                                         ##
 SECCLEAN=0			# Clean between versions.  ##
 ##        ##  222  ##                                      ##
@@ -77,7 +77,7 @@ HOME="$(dirname ~)/$(basename ~)"                           #
 ########################  CONFIGS  ##########################
 #############################################################
 ##                                                          ##
-CONFIG1=cyanogenmod_oneplus3_defconfig    # First config     ##
+CONFIG1=hydrogen_user_defconfig           # First config     ##
 CONFIG2=                                  # Second config     ##
 CONFIG3=                            	  # Third config       ##
 CONFIG4=                        	  # fourth config       ##
@@ -89,10 +89,14 @@ CONFIG5=                            	  # fifth config         ##
 #####################################################################
 ##                                                                 ##
 ##                                                                 ##
-ARCH="arm64"                                     # arch of device  ##
+ARCH=arm64                                       # arch of device  ##
+SUBARCH=arm64
+USER=wisniew99
+HOST=Harfix-machine
 TCDIR=$HOME/TC                                   # Toolchain dir   ##
-TCNAME="gcc-linaro-5.3.1-2016.02-aarch64"        # Toolchain name  ##
-TCEND="bin/aarch64-linux-gnueabihf-"       # End of toolchain name ##
+TCNAME="Hartool1"                                # Toolchain name  ##
+TCEND="bin/aarch64-linux-android-"         # End of toolchain name ##
+TCLIB="lib64/"
 ##                                                                 ##
 ##                      ##  TC example:  ##                        ##
 ##                     $TCDIR/$TCNAME/$TCEND                       ##
@@ -429,13 +433,13 @@ else
     echo "${bldblu} $PRONAME/ZIP_FILES/system/lib/modules/*${txtrst}${blu} not exist. ${txtrst}"
 fi
 
-if [ -e "arch/arm/boot/zImage" ]
+if [ -e "$ARCH/arm/boot/zImage" ]
 then
-    echo "${ylw} arch/arm/boot/zImage exist. ${txtrst}"
-    rm -rf arch/arm/boot/zImage
+    echo "${ylw} $ARCH/arm/boot/zImage exist. ${txtrst}"
+    rm -rf $ARCH/arm/boot/zImage
     echo "${grn} Deleted old zImage. ${txtrst}"
 else
-    echo "${bldblu} arch/arm/boot/zImage${txtrst}${blu} not exist. ${txtrst}"
+    echo "${bldblu} $ARCH/arm/boot/zImage${txtrst}${blu} not exist. ${txtrst}"
 fi
 
 echo ""
@@ -447,7 +451,12 @@ echo ""
 
 # Edit at beginning of script, not here.
 export ARCH=$ARCH
+export SUBARCH=$SUBARCH
+export KBUILD_BUILD_USER=$USER
+export KBUILD_BUILD_HOST=$HOST
 export CROSS_COMPILE=$TCDIR/$TCNAME/$TCEND
+export LD_LIBRARY_PATH=$TCDIR/$TCNAME/$TCLIB
+STRIP=$TCDIR/$TCNAME/$TCENDstrip
 
 # Testing Toolchain
 if [ -e $TCDIR/$TCNAME/$TCENDgcc ]
@@ -489,7 +498,7 @@ function COMPILEZIP
         echo "${grn} Done. ${txtrst}"
         echo ""
 
-        if [ -e "arch/arm/boot/zImage" ]
+        if [ -e "$ARCH/$ARCH/boot/zImage" ]
         then
 
             echo "${bldblu} Coping modules... ${txtrst}"
@@ -498,7 +507,7 @@ function COMPILEZIP
             echo ""
 
             echo "${bldblu} Coping zImage... ${txtrst}"
-            cp arch/arm/boot/zImage $PRONAME/work/boot/
+            cp $ARCH/arm/boot/zImage $PRONAME/work/boot/
             echo "${grn} Done. ${txtrst}"
             echo ""
             echo ""
@@ -568,7 +577,7 @@ function COMPILEZIP
 
 function CLEANER
 {
-    rm -rf arch/arm/boot/zImage
+    rm -rf $ARCH/arm/boot/zImage
     rm -rf $PRONAME/ZIP_FILES/$PATHZIMAGE/*
     rm -rf $PRONAME/ZIP_FILES/$PATHMODULES/*
     rm -rf $PRONAME/work/boot/*
