@@ -30,7 +30,7 @@
 #####################################################
 ##                                                  ##
 PRONAME="Harfix4"         # Project name.            ##
-VERSION="0.1"             # Version number or name.   ##
+VERSION="RC3"             # Version number or name.   ##
 #                                                      ##
 #               New name = new main folder              ##
 #############################################################
@@ -38,17 +38,17 @@ VERSION="0.1"             # Version number or name.   ##
 #############################################################
 ####              (1-enabled, 0-disabled)                ####
 ##                                                         ##
-CLEAN=1				# Clean before compile.    ##
+CLEAN=0             # Clean before compile.    ##
 ##        ##  111  ##                                      ##
 MAIN1=1                         # Compile first version.   ##
-    MAINZIP1=0                      # Zip first  version.  ##
+    MAINZIP1=1                      # Zip first  version.  ##
 ##                                                         ##
-SECCLEAN=0			# Clean between versions.  ##
+SECCLEAN=0          # Clean between versions.  ##
 ##        ##  222  ##                                      ##
-MAIN2=0			        # Compile second version.  ##
+MAIN2=0                 # Compile second version.  ##
     MAINZIP2=1                      # Zip second version.  ##
 ##                                                         ##
-THICLEAN=0			# Clean between versions.  ##
+THICLEAN=0          # Clean between versions.  ##
 ##        ##  333  ##                                      ##
 MAIN3=0                         # Compile third version.   ##
     MAINZIP3=1                      # Zip third version.   ##
@@ -77,11 +77,11 @@ HOME="$(dirname ~)/$(basename ~)"                           #
 ########################  CONFIGS  ##########################
 #############################################################
 ##                                                          ##
-CONFIG1=hydrogen_user_defconfig           # First config     ##
+CONFIG1=cyanogenmod_hydrogen_defconfig    # First config     ##
 CONFIG2=                                  # Second config     ##
-CONFIG3=                            	  # Third config       ##
-CONFIG4=                        	  # fourth config       ##
-CONFIG5=                            	  # fifth config         ##
+CONFIG3=                                  # Third config       ##
+CONFIG4=                              # fourth config       ##
+CONFIG5=                                  # fifth config         ##
 ##                                                                ##
 ##                                                                 ##
 #####################################################################
@@ -105,7 +105,7 @@ TCLIB="lib64/"                                  # lib folder in TC ##
 ####################  BUILD SPECIFIC OPTIONS  #######################
 #####################################################################
 ##                                                                  ##
-NAME1="normal"                   # Name of first version             ##
+NAME1=""                         # Name of first version             ##
 NAME2=""                         # Name of second version             ##
 NAME3=""                         # Name of third version               ##
 NAME4=""                         # Name of fourth version               ##
