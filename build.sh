@@ -498,6 +498,13 @@ function COMPILEZIP
         echo "${grn} Done. ${txtrst}"
         echo ""
 
+        if [ $ARCH = "arm64" ]
+        then
+
+            mv arch/$ARCH/boot/Image.gz-dtb arch/$ARCH/boot/zImage
+
+        fi
+
         if [ -e "arch/$ARCH/boot/zImage" ]
         then
 
