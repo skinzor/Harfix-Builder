@@ -433,13 +433,13 @@ else
     echo "${bldblu} $PRONAME/ZIP_FILES/system/lib/modules/*${txtrst}${blu} not exist. ${txtrst}"
 fi
 
-if [ -e "$ARCH/arm/boot/zImage" ]
+if [ -e "$arch/$ARCH/boot/zImage" ]
 then
-    echo "${ylw} $ARCH/arm/boot/zImage exist. ${txtrst}"
-    rm -rf $ARCH/arm/boot/zImage
+    echo "${ylw} arch/$ARCH/boot/zImage exist. ${txtrst}"
+    rm -rf arch/$ARCH/boot/zImage
     echo "${grn} Deleted old zImage. ${txtrst}"
 else
-    echo "${bldblu} $ARCH/arm/boot/zImage${txtrst}${blu} not exist. ${txtrst}"
+    echo "${bldblu} arch/$ARCH/boot/zImage${txtrst}${blu} not exist. ${txtrst}"
 fi
 
 echo ""
@@ -498,7 +498,7 @@ function COMPILEZIP
         echo "${grn} Done. ${txtrst}"
         echo ""
 
-        if [ -e "$ARCH/$ARCH/boot/zImage" ]
+        if [ -e "arch/$ARCH/boot/zImage" ]
         then
 
             echo "${bldblu} Coping modules... ${txtrst}"
@@ -507,7 +507,7 @@ function COMPILEZIP
             echo ""
 
             echo "${bldblu} Coping zImage... ${txtrst}"
-            cp $ARCH/arm/boot/zImage $PRONAME/work/boot/
+            cp arch/$ARCH/boot/zImage $PRONAME/work/boot/
             echo "${grn} Done. ${txtrst}"
             echo ""
             echo ""
@@ -577,7 +577,7 @@ function COMPILEZIP
 
 function CLEANER
 {
-    rm -rf $ARCH/arm/boot/zImage
+    rm -rf arch/$ARCH/boot/zImage
     rm -rf $PRONAME/ZIP_FILES/$PATHZIMAGE/*
     rm -rf $PRONAME/ZIP_FILES/$PATHMODULES/*
     rm -rf $PRONAME/work/boot/*
