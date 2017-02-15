@@ -90,13 +90,13 @@ CONFIG5=                            	  # fifth config         ##
 ##                                                                 ##
 ##                                                                 ##
 ARCH=arm64                                       # arch of device  ##
-SUBARCH=arm64
-USER=wisniew99
-HOST=Harfix-machine
+SUBARCH=arm64                                  # subarch of device ##
+USER=wisniew99                                   # Name of builder ##
+HOST=Harfix-machine                              # name of machine ##
 TCDIR=$HOME/TC                                   # Toolchain dir   ##
-TCNAME="Hartool1"                                # Toolchain name  ##
+TCNAME="Harchain1"                               # Toolchain name  ##
 TCEND="bin/aarch64-linux-android-"         # End of toolchain name ##
-TCLIB="lib64/"
+TCLIB="lib64/"                                  # lib folder in TC ##
 ##                                                                 ##
 ##                      ##  TC example:  ##                        ##
 ##                     $TCDIR/$TCNAME/$TCEND                       ##
@@ -433,7 +433,7 @@ else
     echo "${bldblu} $PRONAME/ZIP_FILES/system/lib/modules/*${txtrst}${blu} not exist. ${txtrst}"
 fi
 
-if [ -e "$arch/$ARCH/boot/zImage" ]
+if [ -e "arch/$ARCH/boot/zImage" ]
 then
     echo "${ylw} arch/$ARCH/boot/zImage exist. ${txtrst}"
     rm -rf arch/$ARCH/boot/zImage
