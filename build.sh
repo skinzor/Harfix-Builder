@@ -500,9 +500,12 @@ function COMPILEZIP
 
         if [ $ARCH = "arm64" ]
         then
-
-            mv arch/$ARCH/boot/Image.gz-dtb arch/$ARCH/boot/zImage
-
+            if [ -e "arch/$ARCH/boot/Image.gz-dtb" ]
+            then
+                mv arch/$ARCH/boot/Image.gz-dtb arch/$ARCH/boot/zImage
+            else
+                mv arch/$ARCH/boot/Image.gz arch/$ARCH/boot/zImage
+            fi
         fi
 
         if [ -e "arch/$ARCH/boot/zImage" ]
