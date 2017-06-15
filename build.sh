@@ -1,5 +1,22 @@
 #!/bin/bash
 
+#    Copyright 2016, 2017 Rafal Wisniewski (wisniew99@gmail.com)
+#
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+
 #############################################
 #############################################
 ##                                         ##
@@ -7,12 +24,10 @@
 ##                                         ##
 #############################################
 #############################################
-##               2016-2017                 ##
+##                                         ##
 #                                           #
 # Build script for Kernels.                 #
 # By wisniew99 / rafciowis1999              #
-# You can use and edit this as You want. :) #
-# But please save orginal author.           #
 #                                           #
 # Script based on inplementation            #
 # in Harfix3 kernel for i9300.              #
@@ -161,6 +176,7 @@ echo ""
 echo ""
 echo "${gren} Starting Kernel builder...${txtrst}"
 echo "${gren} By${txtrst} ${pur}wisniew99 / rafciowis1999 ${txtrst} "
+echo "${gren} Program is licenced under GNU GPL v2${txtrst}"
 echo ""
 echo ""
 echo ""
