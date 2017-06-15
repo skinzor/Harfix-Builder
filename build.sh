@@ -20,12 +20,11 @@
 #############################################
 #############################################
 ##                                         ##
-####           Kernel builder            ####
+####           Harfix builder            ####
 ##                                         ##
 #############################################
 #############################################
 ##                                         ##
-#                                           #
 # Build script for Kernels.                 #
 # By wisniew99 / rafciowis1999              #
 #                                           #
@@ -174,7 +173,7 @@ JOBS="$(grep -c "processor" "/proc/cpuinfo")"   # Maximum jobs that Your compute
 echo -e '\0033\0143'
 echo ""
 echo ""
-echo "${gren} Starting Kernel builder...${txtrst}"
+echo "${gren} Starting Harfix builder...${txtrst}"
 echo "${gren} By${txtrst} ${pur}wisniew99 / rafciowis1999 ${txtrst} "
 echo "${gren} Program is licenced under GNU GPL v2${txtrst}"
 echo ""
@@ -378,7 +377,7 @@ then
         echo ""
         echo ""
         echo ""
-        echo "${gren} Kernel builder completed all tasks! ${txtrst}"
+        echo "${gren} Harfix builder completed all tasks! ${txtrst}"
         echo ""
         exit 1
     fi
@@ -387,7 +386,7 @@ then
     echo ""
     echo ""
     echo ""
-    echo "${gren} Kernel builder completed all tasks! ${txtrst}"
+    echo "${gren} Harfix builder completed all tasks! ${txtrst}"
     echo ""
     exit 0
 fi
@@ -523,6 +522,10 @@ else
     echo "${bldred} Change dir or name in script ${txtrst}"
     echo "${bldred} to correctly set up toolchain. ${txtrst}"
     echo ""
+    echo ""
+    echo ""
+    echo "${gren} Harfix builder completed all tasks! ${txtrst}"
+    echo ""
     exit 1
 fi
 
@@ -622,7 +625,7 @@ function COMPILEZIP
             echo ""
             echo ""
             echo ""
-            echo "${gren} Kernel builder completed all tasks! ${txtrst}"
+            echo "${gren} Harfix builder completed all tasks! ${txtrst}"
             echo ""
             exit 1
         fi
@@ -819,6 +822,6 @@ fi
 rm -rf $PRONAME/work
 
 
-echo "${gren} Kernel builder completed all tasks! ${txtrst}"
+echo "${gren} Harfix builder completed all tasks! ${txtrst}"
 echo ""
 exit 0

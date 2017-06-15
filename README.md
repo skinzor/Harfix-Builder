@@ -1,4 +1,4 @@
-Kernel builder script by wisniew99 <br />
+Harfix builder script by wisniew99 <br />
 Program is licenced under GNU GPL v2 <br />
  <br />
 Script makes compiling of kernel more confortable.  <br />
