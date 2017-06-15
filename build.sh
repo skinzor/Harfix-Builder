@@ -38,17 +38,17 @@ VERSION="R2.2"            # Version number or name.   ##
 #############################################################
 ####              (1-enabled, 0-disabled)                ####
 ##                                                         ##
-CLEAN=0             # Clean before compile.    ##
+CLEAN=0                         # Clean before compile.    ##
 ##        ##  111  ##                                      ##
 MAIN1=1                         # Compile first version.   ##
     MAINZIP1=1                      # Zip first  version.  ##
 ##                                                         ##
-SECCLEAN=0          # Clean between versions.  ##
+SECCLEAN=0                      # Clean between versions.  ##
 ##        ##  222  ##                                      ##
-MAIN2=0                 # Compile second version.  ##
+MAIN2=0                         # Compile second version.  ##
     MAINZIP2=1                      # Zip second version.  ##
 ##                                                         ##
-THICLEAN=0          # Clean between versions.  ##
+THICLEAN=0                      # Clean between versions.  ##
 ##        ##  333  ##                                      ##
 MAIN3=0                         # Compile third version.   ##
     MAINZIP3=1                      # Zip third version.   ##
@@ -80,7 +80,7 @@ HOME="$(dirname ~)/$(basename ~)"                           #
 CONFIG1=harfix4_defconfig                 # First config     ##
 CONFIG2=                                  # Second config     ##
 CONFIG3=                                  # Third config       ##
-CONFIG4=                              # fourth config       ##
+CONFIG4=                                  # fourth config       ##
 CONFIG5=                                  # fifth config         ##
 ##                                                                ##
 ##                                                                 ##
