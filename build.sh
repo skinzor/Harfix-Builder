@@ -215,6 +215,42 @@ else
     echo "${grn} Created. ${txtrst}"
 fi
 
+if [ -e "$PRONAME/ZIP_FILES2" ]
+then
+    echo "${bldblu} $PRONAME/ZIP_FILES2${txtrst}${blu} exist. ${txtrst}"
+else
+    echo "${ylw} $PRONAME/ZIP_FILES2 not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES2
+    echo "${grn} Created. ${txtrst}"
+fi
+
+if [ -e "$PRONAME/ZIP_FILES3" ]
+then
+    echo "${bldblu} $PRONAME/ZIP_FILES3${txtrst}${blu} exist. ${txtrst}"
+else
+    echo "${ylw} $PRONAME/ZIP_FILE3S not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES3
+    echo "${grn} Created. ${txtrst}"
+fi
+
+if [ -e "$PRONAME/ZIP_FILES4" ]
+then
+    echo "${bldblu} $PRONAME/ZIP_FILES4${txtrst}${blu} exist. ${txtrst}"
+else
+    echo "${ylw} $PRONAME/ZIP_FILES4 not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES4
+    echo "${grn} Created. ${txtrst}"
+fi
+
+if [ -e "$PRONAME/ZIP_FILES5" ]
+then
+    echo "${bldblu} $PRONAME/ZIP_FILES5${txtrst}${blu} exist. ${txtrst}"
+else
+    echo "${ylw} $PRONAME/ZIP_FILES5 not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES5
+    echo "${grn} Created. ${txtrst}"
+fi
+
 if [ -e "$PRONAME/ZIP_FILES/$PATHZIMAGE1" ]
 then
     echo "${bldblu} $PRONAME/ZIP_FILES/$PATHZIMAGE1${txtrst}${blu} exist. ${txtrst}"
@@ -537,20 +573,20 @@ function COMPILEZIP
                 echo ""
 
                 echo "${bldblu} Coping files for zip... ${txtrst}"
-                cp $PRONAME/work/modules/* $PRONAME/ZIP_FILES/$PATHMODULES/
-                cp $PRONAME/work/boot/zImage $PRONAME/ZIP_FILES/$PATHZIMAGE/
+                cp $PRONAME/work/modules/* $PRONAME/$ZIP_FILES/$PATHMODULES/
+                cp $PRONAME/work/boot/zImage $PRONAME/$ZIP_FILES/$PATHZIMAGE/
                 echo "${grn} Done. ${txtrst}"
                 echo ""
 
                 echo "${bldblu} Zipping... ${txtrst}"
-                cd $PRONAME/ZIP_FILES
+                cd $PRONAME/$ZIP_FILES
                 zip -r $PRONAME.zip *
                 cd -
                 echo "${grn} Done. ${txtrst}"
                 echo ""
 
                 echo "${bldblu} Moving... ${txtrst}"
-                mv $PRONAME/ZIP_FILES/$PRONAME.zip $PRONAME/
+                mv $PRONAME/$ZIP_FILES/$PRONAME.zip $PRONAME/
                 echo "${grn} Done. ${txtrst}"
                 echo ""
 
@@ -620,6 +656,7 @@ NAME=$NAME1
 CONFIG=$CONFIG1
 PATHMODULES=$PATHMODULES1
 PATHZIMAGE=$PATHZIMAGE1
+ZIP_FILES=ZIP_FILES
 COMPILEZIP
 CLEANER
 
@@ -649,6 +686,7 @@ NAME=$NAME2
 CONFIG=$CONFIG2
 PATHMODULES=$PATHMODULES2
 PATHZIMAGE=$PATHZIMAGE2
+ZIP_FILES=ZIP_FILES2
 COMPILEZIP
 CLEANER
 
@@ -677,6 +715,7 @@ NAME=$NAME3
 CONFIG=$CONFIG3
 PATHMODULES=$PATHMODULES3
 PATHZIMAGE=$PATHZIMAGE3
+ZIP_FILES=ZIP_FILES3
 COMPILEZIP
 CLEANER
 
@@ -706,6 +745,7 @@ NAME=$NAME4
 CONFIG=$CONFIG4
 PATHMODULES=$PATHMODULES4
 PATHZIMAGE=$PATHZIMAGE4
+ZIP_FILES=ZIP_FILES4
 COMPILEZIP
 CLEANER
 
@@ -735,6 +775,7 @@ NAME=$NAME5
 CONFIG=$CONFIG5
 PATHMODULES=$PATHMODULES5
 PATHZIMAGE=$PATHZIMAGE5
+ZIP_FILES=ZIP_FILES5
 COMPILEZIP
 CLEANER
 
