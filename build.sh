@@ -466,24 +466,6 @@ else
     echo "${bldblu} $PRONAME-$VERSION-$NAME5.zip${txtrst}${blu} not exist. ${txtrst}"
 fi
 
-if [ -e "$PRONAME/ZIP_FILES/boot/bootimg/zImage" ]
-then
-    echo "${ylw} $PRONAME/ZIP_FILES/boot/bootimg/zImage exist. ${txtrst}"
-    rm -rf $PRONAME/ZIP_FILES/boot/bootimg/*
-    echo "${grn} Deleted old zImage. ${txtrst}"
-else
-    echo "${bldblu} $PRONAME/ZIP_FILES/boot/bootimg/*${txtrst}${blu} not exist. ${txtrst}"
-fi
-
-if [ -e "$PRONAME/ZIP_FILES/system/lib/modules/dhd.ko" ]
-then
-    echo "${ylw} $PRONAME/ZIP_FILES/system/lib/modules/dhd.ko exist. ${txtrst}"
-    rm -rf $PRONAME/ZIP_FILES/system/lib/modules/*
-    echo "${grn} Deleted all modules. ${txtrst}"
-else
-    echo "${bldblu} $PRONAME/ZIP_FILES/system/lib/modules/*${txtrst}${blu} not exist. ${txtrst}"
-fi
-
 if [ -e "arch/$ARCH/boot/zImage" ]
 then
     echo "${ylw} arch/$ARCH/boot/zImage exist. ${txtrst}"
@@ -492,6 +474,25 @@ then
 else
     echo "${bldblu} arch/$ARCH/boot/zImage${txtrst}${blu} not exist. ${txtrst}"
 fi
+
+    rm -rf $PRONAME/ZIP_FILES/PATHZIMAGE1/*zImage*
+    rm -rf $PRONAME/ZIP_FILES/PATHZIMAGE1/Image
+    rm -rf $PRONAME/ZIP_FILES2/PATHZIMAGE2/*zImage*
+    rm -rf $PRONAME/ZIP_FILES2/PATHZIMAGE2/Image
+    rm -rf $PRONAME/ZIP_FILES3/PATHZIMAGE3/*zImage*
+    rm -rf $PRONAME/ZIP_FILES3/PATHZIMAGE3/Image
+    rm -rf $PRONAME/ZIP_FILES4/PATHZIMAGE4/*zImage*
+    rm -rf $PRONAME/ZIP_FILES4/PATHZIMAGE4/Image
+    rm -rf $PRONAME/ZIP_FILES5/PATHZIMAGE5/*zImage*
+    rm -rf $PRONAME/ZIP_FILES5/PATHZIMAGE5/Image
+    echo "${grn} Deleted old Images. ${txtrst}"
+
+    rm -rf $PRONAME/ZIP_FILES/PATHMODULES1/*
+    rm -rf $PRONAME/ZIP_FILES2/PATHMODULES2/*
+	rm -rf $PRONAME/ZIP_FILES3/PATHMODULES3/*
+    rm -rf $PRONAME/ZIP_FILES4/PATHMODULES4/*
+    rm -rf $PRONAME/ZIP_FILES5/PATHMODULES4/*
+    echo "${grn} Deleted all modules. ${txtrst}"
 
 echo ""
 echo "${txtbld} Done deleting files. ${txtrst}"
