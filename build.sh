@@ -30,7 +30,7 @@
 #####################################################
 ##                                                  ##
 PRONAME="Harfix4"         # Project name.            ##
-VERSION="RC3"             # Version number or name.   ##
+VERSION="R2.2"            # Version number or name.   ##
 #                                                      ##
 #               New name = new main folder              ##
 #############################################################
@@ -77,7 +77,7 @@ HOME="$(dirname ~)/$(basename ~)"                           #
 ########################  CONFIGS  ##########################
 #############################################################
 ##                                                          ##
-CONFIG1=cyanogenmod_hydrogen_defconfig    # First config     ##
+CONFIG1=harfix4_defconfig                 # First config     ##
 CONFIG2=                                  # Second config     ##
 CONFIG3=                                  # Third config       ##
 CONFIG4=                              # fourth config       ##
@@ -94,7 +94,7 @@ SUBARCH=arm64                                  # subarch of device ##
 USER=wisniew99                                   # Name of builder ##
 HOST=Harfix-machine                              # name of machine ##
 TCDIR=$HOME/TC                                   # Toolchain dir   ##
-TCNAME="Harchain1"                               # Toolchain name  ##
+TCNAME="google-ndk"                              # Toolchain name  ##
 TCEND="bin/aarch64-linux-android-"         # End of toolchain name ##
 TCLIB="lib64/"                                  # lib folder in TC ##
 ##                                                                 ##
