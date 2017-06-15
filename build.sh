@@ -624,8 +624,9 @@ function COMPILEZIP
 function CLEANER
 {
     rm -rf arch/$ARCH/boot/zImage
-    rm -rf $PRONAME/$IP_FILES/$PATHZIMAGE/zImage
-#    rm -rf $PRONAME/ZIP_FILES/$PATHMODULES/*
+    rm -rf $PRONAME/$ZIP_FILES/$PATHZIMAGE/*zImage*
+    rm -rf $PRONAME/$ZIP_FILES/$PATHZIMAGE/Image
+    rm -rf $PRONAME/$ZIP_FILES/$PATHMODULES/*
     rm -rf $PRONAME/work/boot/*
     rm -rf $PRONAME/work/modules/*
 }
