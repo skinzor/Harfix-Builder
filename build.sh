@@ -285,39 +285,39 @@ else
     echo "${grn} Created. ${txtrst}"
 fi
 
-if [ -e "$PRONAME/ZIP_FILES/$PATHZIMAGE2" ]
+if [ -e "$PRONAME/ZIP_FILES2/$PATHZIMAGE2" ]
 then
-    echo "${bldblu} $PRONAME/ZIP_FILES/$PATHZIMAGE2${txtrst}${blu} exist. ${txtrst}"
+    echo "${bldblu} $PRONAME/ZIP_FILES2/$PATHZIMAGE2${txtrst}${blu} exist. ${txtrst}"
 else
-    echo "${ylw} $PRONAME/ZIP_FILES/$PATHZIMAGE2 not exist. ${txtrst}"
-    mkdir $PRONAME/ZIP_FILES/$PATHZIMAGE2
+    echo "${ylw} $PRONAME/ZIP_FILES2/$PATHZIMAGE2 not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES2/$PATHZIMAGE2
     echo "${grn} Created. ${txtrst}"
 fi
 
-if [ -e "$PRONAME/ZIP_FILES/$PATHZIMAGE3" ]
+if [ -e "$PRONAME/ZIP_FILES3/$PATHZIMAGE3" ]
 then
-    echo "${bldblu} $PRONAME/ZIP_FILES/$PATHZIMAGE3${txtrst}${blu} exist. ${txtrst}"
+    echo "${bldblu} $PRONAME/ZIP_FILES3/$PATHZIMAGE3${txtrst}${blu} exist. ${txtrst}"
 else
-    echo "${ylw} $PRONAME/ZIP_FILES/$PATHZIMAGE3 not exist. ${txtrst}"
-    mkdir $PRONAME/ZIP_FILES/$PATHZIMAGE3
+    echo "${ylw} $PRONAME/ZIP_FILES3/$PATHZIMAGE3 not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES3/$PATHZIMAGE3
     echo "${grn} Created. ${txtrst}"
 fi
 
-if [ -e "$PRONAME/ZIP_FILES/$PATHZIMAGE4" ]
+if [ -e "$PRONAME/ZIP_FILES4/$PATHZIMAGE4" ]
 then
-    echo "${bldblu} $PRONAME/ZIP_FILES/$PATHZIMAGE4${txtrst}${blu} exist. ${txtrst}"
+    echo "${bldblu} $PRONAME/ZIP_FILES4/$PATHZIMAGE4${txtrst}${blu} exist. ${txtrst}"
 else
-    echo "${ylw} $PRONAME/ZIP_FILES/$PATHZIMAGE4 not exist. ${txtrst}"
-    mkdir $PRONAME/ZIP_FILES/$PATHZIMAGE4
+    echo "${ylw} $PRONAME/ZIP_FILES4/$PATHZIMAGE4 not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES4/$PATHZIMAGE4
     echo "${grn} Created. ${txtrst}"
 fi
 
-if [ -e "$PRONAME/ZIP_FILES/$PATHZIMAGE5" ]
+if [ -e "$PRONAME/ZIP_FILES5/$PATHZIMAGE5" ]
 then
-    echo "${bldblu} $PRONAME/ZIP_FILES/$PATHZIMAGE5${txtrst}${blu} exist. ${txtrst}"
+    echo "${bldblu} $PRONAME/ZIP_FILES5/$PATHZIMAGE5${txtrst}${blu} exist. ${txtrst}"
 else
-    echo "${ylw} $PRONAME/ZIP_FILES/$PATHZIMAGE5 not exist. ${txtrst}"
-    mkdir $PRONAME/ZIP_FILES/$PATHZIMAGE5
+    echo "${ylw} $PRONAME/ZIP_FILES5/$PATHZIMAGE5 not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES5/$PATHZIMAGE5
     echo "${grn} Created. ${txtrst}"
 fi
 
@@ -330,39 +330,39 @@ else
     echo "${grn} Created. ${txtrst}"
 fi
 
-if [ -e "$PRONAME/ZIP_FILES/$PATHMODULES2" ]
+if [ -e "$PRONAME/ZIP_FILES2/$PATHMODULES2" ]
 then
-    echo "${bldblu} $PRONAME/ZIP_FILES/$PATHMODULES2${txtrst}${blu} exist. ${txtrst}"
+    echo "${bldblu} $PRONAME/ZIP_FILES2/$PATHMODULES2${txtrst}${blu} exist. ${txtrst}"
 else
-    echo "${ylw} $PRONAME/ZIP_FILES/$PATHMODULES2 not exist. ${txtrst}"
-    mkdir $PRONAME/ZIP_FILES/$PATHMODULES2
+    echo "${ylw} $PRONAME/ZIP_FILES2/$PATHMODULES2 not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES2/$PATHMODULES2
     echo "${grn} Created. ${txtrst}"
 fi
 
-if [ -e "$PRONAME/ZIP_FILES/$PATHMODULES3" ]
+if [ -e "$PRONAME/ZIP_FILES3/$PATHMODULES3" ]
 then
-    echo "${bldblu} $PRONAME/ZIP_FILES/$PATHMODULES3${txtrst}${blu} exist. ${txtrst}"
+    echo "${bldblu} $PRONAME/ZIP_FILES3/$PATHMODULES3${txtrst}${blu} exist. ${txtrst}"
 else
-    echo "${ylw} $PRONAME/ZIP_FILES/$PATHMODULES3 not exist. ${txtrst}"
-    mkdir $PRONAME/ZIP_FILES/$PATHMODULES3
+    echo "${ylw} $PRONAME/ZIP_FILES3/$PATHMODULES3 not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES3/$PATHMODULES3
     echo "${grn} Created. ${txtrst}"
 fi
 
-if [ -e "$PRONAME/ZIP_FILES/$PATHMODULES4" ]
+if [ -e "$PRONAME/ZIP_FILES4/$PATHMODULES4" ]
 then
-    echo "${bldblu} $PRONAME/ZIP_FILES/$PATHMODULES4${txtrst}${blu} exist. ${txtrst}"
+    echo "${bldblu} $PRONAME/ZIP_FILES4/$PATHMODULES4${txtrst}${blu} exist. ${txtrst}"
 else
-    echo "${ylw} $PRONAME/ZIP_FILES/$PATHMODULES4 not exist. ${txtrst}"
-    mkdir $PRONAME/ZIP_FILES/$PATHMODULES4
+    echo "${ylw} $PRONAME/ZIP_FILES4/$PATHMODULES4 not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES4/$PATHMODULES4
     echo "${grn} Created. ${txtrst}"
 fi
 
-if [ -e "$PRONAME/ZIP_FILES/$PATHMODULES5" ]
+if [ -e "$PRONAME/ZIP_FILES5/$PATHMODULES5" ]
 then
-    echo "${bldblu} $PRONAME/ZIP_FILES/$PATHMODULES5${txtrst}${blu} exist. ${txtrst}"
+    echo "${bldblu} $PRONAME/ZIP_FILES5/$PATHMODULES5${txtrst}${blu} exist. ${txtrst}"
 else
-    echo "${ylw} $PRONAME/ZIP_FILES/$PATHMODULES5 not exist. ${txtrst}"
-    mkdir $PRONAME/ZIP_FILES/$PATHMODULES5
+    echo "${ylw} $PRONAME/ZIP_FILES5/$PATHMODULES5 not exist. ${txtrst}"
+    mkdir $PRONAME/ZIP_FILES5/$PATHMODULES5
     echo "${grn} Created. ${txtrst}"
 fi
 
