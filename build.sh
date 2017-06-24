@@ -222,6 +222,15 @@ else
     echo "${grn} Created. ${txtrst}"
 fi
 
+if [ -e "$PRONAME/Releases" ]
+then
+    echo "${bldblu} $PRONAME/Releases${txtrst}${blu} exist. ${txtrst}"
+else
+    echo "${ylw} $PRONAME/Releases not exist. ${txtrst}"
+    mkdir $PRONAME/Releases
+    echo "${grn} Created. ${txtrst}"
+fi
+
 if [ -e "$PRONAME/ZIP_FILES" ]
 then
     echo "${bldblu} $PRONAME/ZIP_FILES${txtrst}${blu} exist. ${txtrst}"
@@ -607,12 +616,12 @@ function COMPILEZIP
                 echo ""
 
                 echo "${bldblu} Moving... ${txtrst}"
-                mv $PRONAME/$ZIP_FILES/$PRONAME.zip $PRONAME/
+                mv $PRONAME/$ZIP_FILES/$PRONAME.zip $PRONAME/Releases/
                 echo "${grn} Done. ${txtrst}"
                 echo ""
 
                 echo "${bldblu} Renaming... ${txtrst}"
-                mv $PRONAME/$PRONAME.zip $PRONAME/$PRONAME-$NAME-$VERSION.zip
+                mv $PRONAME/Releases/$PRONAME.zip $PRONAME/Releases/$PRONAME-$NAME-$VERSION.zip
                 echo "${grn} Done. ${txtrst}"
                 echo ""
                 echo ""
