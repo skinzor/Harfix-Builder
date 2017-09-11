@@ -150,26 +150,27 @@ PATHMODULES5=""                          # modules path for fifth version  ##
 ##               $PRONAME/ZIP_FILES/PATHZIMAGE                     ##
 ##               $PRONAME/ZIP_FILES/PATHMODULES                  ##
 ##                                                             ##
-##                                                           ##
-#############################################################
-########################  COLORS  ###########################
-#############################################################
-##                                                         ##
-red=$(tput setaf 1)             # red     # Error          ##
-grn=$(tput setaf 2)             # green   # Done           ##
-ylw=$(tput setaf 11)            # yellow  # Warring        ##
-blu=$(tput setaf 4)             # blue    # path           ##
-gren=$(tput setaf 118)          # green   # Name           ##
-pur=$(tput setaf 201)           # purple  # Name           ##
-txtbld=$(tput bold)             # Bold    # Info           ##
-bldred=${txtbld}$(tput setaf 1) # Red     # Error desc     ##
-bldblu=${txtbld}$(tput setaf 4) # blue    # Info           ##
-txtrst=$(tput sgr0)             # Reset                    ##
-##                                                         ##
-#############################################################
+###############################################################
 #############################################################
 
-JOBS="$(grep -c "processor" "/proc/cpuinfo")"   # Maximum jobs that Your computer can do.
+############
+## Colors ##
+############
+
+red=$(tput setaf 1)              # red     # Error
+grn=$(tput setaf 2)              # green   # Done
+ylw=$(tput setaf 11)             # yellow  # Warring
+blu=$(tput setaf 4)              # blue    # path
+gren=$(tput setaf 118)           # green   # Name
+pur=$(tput setaf 201)            # purple  # Name
+txtbld=$(tput bold)              # Bold    # Info
+bldred=${txtbld}$(tput setaf 1)  # Red     # Error desc
+bldblu=${txtbld}$(tput setaf 4)  # blue    # Info
+txtrst=$(tput sgr0)              # Reset
+
+#############
+## Welcome ##
+#############
 
 echo -e '\0033\0143'
 echo ""
@@ -180,10 +181,14 @@ echo "${gren} Program is licenced under GNU GPL v2${txtrst}"
 echo ""
 echo ""
 echo ""
+
+####################
+## Create folders ##
+####################
+
 echo "${txtbld} Creating folders... ${txtrst}"
 echo ""
 
-# Create unnecessary folders.
 if [ -e "$PRONAME" ]
 then
     echo "${bldblu} $PRONAME${txtrst}${blu} exist. ${txtrst}"
@@ -372,6 +377,10 @@ echo ""
 echo ""
 echo ""
 
+###############
+## First run ##
+###############
+
 if [ $FIRSTRUN = 1 ]
 then
     echo "${txtbld} First run of script detected. ${txtrst}"
@@ -400,6 +409,10 @@ then
     echo ""
     exit 0
 fi
+
+##################
+## Delete files ##
+##################
 
 echo "${txtbld} Deleting files... ${txtrst}"
 echo ""
@@ -485,24 +498,24 @@ else
     echo "${bldblu} arch/$ARCH/boot/zImage${txtrst}${blu} not exist. ${txtrst}"
 fi
 
-    rm -rf $PRONAME/ZIP_FILES/PATHZIMAGE1/*zImage*
-    rm -rf $PRONAME/ZIP_FILES/PATHZIMAGE1/Image
-    rm -rf $PRONAME/ZIP_FILES2/PATHZIMAGE2/*zImage*
-    rm -rf $PRONAME/ZIP_FILES2/PATHZIMAGE2/Image
-    rm -rf $PRONAME/ZIP_FILES3/PATHZIMAGE3/*zImage*
-    rm -rf $PRONAME/ZIP_FILES3/PATHZIMAGE3/Image
-    rm -rf $PRONAME/ZIP_FILES4/PATHZIMAGE4/*zImage*
-    rm -rf $PRONAME/ZIP_FILES4/PATHZIMAGE4/Image
-    rm -rf $PRONAME/ZIP_FILES5/PATHZIMAGE5/*zImage*
-    rm -rf $PRONAME/ZIP_FILES5/PATHZIMAGE5/Image
-    echo "${grn} Deleted old Images. ${txtrst}"
+rm -rf $PRONAME/ZIP_FILES/PATHZIMAGE1/*zImage*
+rm -rf $PRONAME/ZIP_FILES/PATHZIMAGE1/Image
+rm -rf $PRONAME/ZIP_FILES2/PATHZIMAGE2/*zImage*
+rm -rf $PRONAME/ZIP_FILES2/PATHZIMAGE2/Image
+rm -rf $PRONAME/ZIP_FILES3/PATHZIMAGE3/*zImage*
+rm -rf $PRONAME/ZIP_FILES3/PATHZIMAGE3/Image
+rm -rf $PRONAME/ZIP_FILES4/PATHZIMAGE4/*zImage*
+rm -rf $PRONAME/ZIP_FILES4/PATHZIMAGE4/Image
+rm -rf $PRONAME/ZIP_FILES5/PATHZIMAGE5/*zImage*
+rm -rf $PRONAME/ZIP_FILES5/PATHZIMAGE5/Image
+echo "${grn} Deleted old Images. ${txtrst}"
 
-    rm -rf $PRONAME/ZIP_FILES/PATHMODULES1/*
-    rm -rf $PRONAME/ZIP_FILES2/PATHMODULES2/*
-	rm -rf $PRONAME/ZIP_FILES3/PATHMODULES3/*
-    rm -rf $PRONAME/ZIP_FILES4/PATHMODULES4/*
-    rm -rf $PRONAME/ZIP_FILES5/PATHMODULES4/*
-    echo "${grn} Deleted all modules. ${txtrst}"
+rm -rf $PRONAME/ZIP_FILES/PATHMODULES1/*
+rm -rf $PRONAME/ZIP_FILES2/PATHMODULES2/*
+rm -rf $PRONAME/ZIP_FILES3/PATHMODULES3/*
+rm -rf $PRONAME/ZIP_FILES4/PATHMODULES4/*
+rm -rf $PRONAME/ZIP_FILES5/PATHMODULES4/*
+echo "${grn} Deleted all modules. ${txtrst}"
 
 echo ""
 echo "${txtbld} Done deleting files. ${txtrst}"
@@ -510,8 +523,10 @@ echo ""
 echo ""
 echo ""
 
+#############
+## Exports ##
+#############
 
-# Edit at beginning of script, not here.
 export ARCH=$ARCH
 export SUBARCH=$SUBARCH
 export KBUILD_BUILD_USER=$USER
@@ -520,7 +535,11 @@ export CROSS_COMPILE=$TCDIR/$TCNAME/$TCEND
 export LD_LIBRARY_PATH=$TCDIR/$TCNAME/$TCLIB
 STRIP=$TCDIR/$TCNAME/$TCENDstrip
 
-# Testing Toolchain
+
+#######################
+## Testing Toolchain ##
+#######################
+
 if [ -e $TCDIR/$TCNAME/$TCENDgcc ]
 then
     echo "${grn} Toolchain set correctly. ${txtrst}"
@@ -543,6 +562,8 @@ fi
 #############
 # Functions #
 #############
+
+JOBS="$(grep -c "processor" "/proc/cpuinfo")"   # Maximum jobs that Your computer can do.
 
 function COMPILEZIP
 {
